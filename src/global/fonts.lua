@@ -1,3 +1,3 @@
 FONTS = {}
-FONTS.NORMAL = LG.newFont(12)
+FONTS.NORMAL = LG.newFont(16)
 FONTS.TITLE = LG.newFont(16)

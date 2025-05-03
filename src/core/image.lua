@@ -9,15 +9,21 @@ function Image:new(img, scale, angle)
 end
 
 function Image:draw()
-    LG.draw(self.img, self.x, self.y, self.angle, self.scale, self.scale)
+    if self.img then
+        LG.draw(self.img, self.x, self.y, self.angle, self.scale, self.scale)
+    end
 end
 
 function Image:getHeight()
-    return math.floor(self.img:getHeight() * self.scale)
+    if self.img then
+        return math.floor(self.img:getHeight() * self.scale)
+    end
 end
 
 function Image:getWidth()
-    return math.floor(self.img:getWidth() * self.scale)
+    if self.img then 
+        return math.floor(self.img:getWidth() * self.scale)
+    end
 end
 
 function Image:setCoordinates(x, y)

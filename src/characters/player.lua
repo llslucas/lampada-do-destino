@@ -2,7 +2,7 @@ local Character = require 'src.characters.character'
 local Player = Character:extend()
 
 function Player:new()
-  Player.super.new(self, LG.newImage("assets/img/characters/david.png"), 1)
+  Player.super.new(self, LG.newImage("assets/img/characters/david-sprite.png"), IMAGE_SCALING)
 end
 
 function Player:update(dt)
