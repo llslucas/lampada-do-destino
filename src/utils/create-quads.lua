@@ -12,9 +12,10 @@ local function createQuads(image, columns, rows, xmargin, ymargin)
   ymargin = ymargin or 0
 
   for y = 0, rows - 1 do
+    table.insert(quads, {})
     for x = 0, columns - 1 do
       table.insert(
-        quads,
+        quads[y + 1],
         LG.newQuad(
           (x * width) + (x == 0 and 0 or xmargin),
           (y * height) + (y == 0 and 0 or ymargin),

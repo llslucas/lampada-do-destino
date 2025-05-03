@@ -1,0 +1,24 @@
+local Character = require 'src.characters.character'
+local Player = Character:extend()
+
+function Player:new()
+  Player.super.new(self, LG.newImage("assets/img/characters/david.png"), 1)
+end
+
+function Player:update(dt)
+  self.super.update(self, dt)
+
+  if love.keyboard.isDown('up') then 
+    self:walkUp()
+  elseif love.keyboard.isDown('down') then
+    self:walkDown()
+  end
+
+  if love.keyboard.isDown('left') then 
+    self:walkLeft()
+  elseif love.keyboard.isDown('right') then
+    self:walkRight()
+  end
+end
+
+return Player
