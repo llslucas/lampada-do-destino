@@ -32,24 +32,12 @@ function Character:update(dt)
   local offset = self.speed * dt
   self.moving = false
 
-  if self.destinationX > self.x then
-    self:turnRight()
-    self.x = math.min(self.x + offset, self.destinationX)
-    self.moving = true
-  elseif self.destinationX < self.x then
-    self:turnLeft()
-    self.x = math.max(self.x - offset, self.destinationX)
-    self.moving = true
+  if self.destinationX ~= self.x then 
+    self:moveX(offset)
   end
 
-  if self.destinationY > self.y then
-    self:turnDown()
-    self.y = math.min(self.y + offset, self.destinationY)
-    self.moving = true
-  elseif self.destinationY < self.y then
-    self:turnUp()
-    self.y = math.max(self.y - offset, self.destinationY)
-    self.moving = true
+  if self.destinationY ~= self.y then
+    self:moveY(offset)
   end
 
   if self.moving then
@@ -69,48 +57,135 @@ function Character:setCoordinates(x,y)
   self.destinationY = y
 end
 
-function Character:turnDown()
-  self.direction = 1
+function Character:getHeight()
+  return Character.super.getHeight(self) / 4
 end
 
-function Character:turnUp()
-  self.direction = 2
+function Character:getWidth()
+  return Character.super.getWidth(self) / 4
 end
 
-function Character:turnLeft()
-  self.direction = 3
+function Character:turn(direction)
+  local directions = {down = 1, up = 2, left = 3, right = 4}
+  self.direction = directions[direction]
 end
 
-function Character:turnRight()
-  self.direction = 4
+function Character:moveX(distance)
+  if self:checkGlobalCollision(self.destinationX, self.y) then
+    self.destinationX = self.x
+  end
+
+  if self.destinationX > self.x then
+    self.x = math.min(self.x + distance, self.destinationX)
+    self:turn('right')
+  elseif self.destinationX < self.x then
+    self.x = math.max(self.x - distance, self.destinationX)
+    self:turn('left')
+  end
+
+  self.moving = true
 end
 
-function Character:walkUp()
+function Character:moveY(distance)
+  if self:checkGlobalCollision(self.x, self.destinationY) then
+    self.destinationY = self.y
+  end
+
+  if self.destinationY > self.y then
+    self:turn('down')
+    self.y = math.min(self.y + distance, self.destinationY)
+  elseif self.destinationY < self.y then
+    self:turn('up')
+    self.y = math.max(self.y - distance, self.destinationY)
+  end
+
+  self.moving = true
+end
+
+function Character:walkUp(chunks)
+  chunks = chunks or 1
   if self.destinationX == self.x and self.destinationY == self.y then
-    self.destinationY = self.y - WALK_DISTANCE
+    self:turn('up')
     self.moving = true
+    self.destinationY = self.y - WALK_DISTANCE * chunks
   end
 end
 
-function Character:walkDown()
+function Character:walkDown(chunks)
+  chunks = chunks or 1
   if self.destinationX == self.x and self.destinationY == self.y then
-    self.destinationY = self.y + WALK_DISTANCE
+    self:turn('down')
     self.moving = true
+    self.destinationY = self.y + WALK_DISTANCE * chunks
   end
 end
 
-function Character:walkLeft()
+function Character:walkLeft(chunks)
+  chunks = chunks or 1
   if self.destinationX == self.x and self.destinationY == self.y then
-    self.destinationX = self.x - WALK_DISTANCE
+    self:turn('left')
     self.moving = true
+    self.destinationX = self.x - WALK_DISTANCE * chunks
   end
 end
 
-function Character:walkRight()
+function Character:walkRight(chunks)
+  chunks = chunks or 1
   if self.destinationX == self.x and self.destinationY == self.y then
-    self.destinationX = self.x + WALK_DISTANCE
+    self:turn('right')
     self.moving = true
+    self.destinationX = self.x + WALK_DISTANCE * chunks
   end
+end
+
+function Character:checkFutureCollision(object, destinationX, destinationY)
+  local futureHitbox = {
+    x = destinationX,
+    y = destinationY,
+    w = self:getWidth(),
+    h = self:getHeight()
+  }
+
+  local objectHitbox = {}
+  objectHitbox.x, objectHitbox.y, objectHitbox.w, objectHitbox.h = object:getHitbox()
+
+  local collision = futureHitbox.x < objectHitbox.x + objectHitbox.w and
+                    futureHitbox.x + futureHitbox.w > objectHitbox.x and
+                    futureHitbox.y < objectHitbox.y + objectHitbox.h and
+                    futureHitbox.y + futureHitbox.h > objectHitbox.y
+
+  return collision
+end
+
+function Character:checkFutureBorderCollision(destinationX, destinationY)
+  local futureHitbox = {
+    x = destinationX,
+    y = destinationY,
+    w = self:getWidth(),
+    h = self:getHeight()
+  }
+
+  local screenWidth, screenHeight = LG.getWidth(), LG.getHeight()
+
+  local collision = futureHitbox.x < 0 or
+                    futureHitbox.y < 0 or
+                    futureHitbox.x + futureHitbox.w > screenWidth or
+                    futureHitbox.y + futureHitbox.h > screenHeight
+
+  return collision
+end
+
+function Character:checkGlobalCollision(destinationX, destinationY)
+  for _, entity in ipairs(WORLD.ENTITIES) do
+    if self.id ~= entity.id then
+      local collision = self:checkFutureCollision(entity, destinationX, destinationY)
+      if collision then
+        return collision
+      end
+    end
+  end
+
+  return self:checkFutureBorderCollision(destinationX, destinationY)
 end
 
 return Character
