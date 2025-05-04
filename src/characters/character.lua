@@ -176,7 +176,7 @@ function Character:checkFutureBorderCollision(destinationX, destinationY)
 end
 
 function Character:checkGlobalCollision(destinationX, destinationY)
-  for _, entity in ipairs(WORLD.ENTITIES) do
+  for _, entity in WORLD.ENTITIES:getItens() do
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then

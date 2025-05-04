@@ -3,8 +3,10 @@ local Npc = Character:extend()
 
 function Npc:new(spriteName, walkInterval)
   Npc.super.new(self, LG.newImage('assets/img/characters/npc/' .. spriteName .. '.png'), IMAGE_SCALING) 
-  self.walkInterval = walkInterval or 3
+  self.walkInterval = walkInterval or 4
   self.walkTime = 0
+  self.dialogs = {}
+  self.currentDialog = 0
 end
 
 function Npc:update(dt)
@@ -34,8 +36,21 @@ function Npc:walkStrategy()
 end
 
 function Npc:interact(direction)
-  print('interação realizada do lado: ' .. direction)
-  self:turn(direction)
+  if not self.moving then
+    self:turn(direction)
+  end
+end
+
+function Npc:addDialog(text)
+  table.insert(self.dialogs, text)
+end
+
+function Npc:setDialogs(dialogs)
+  self.dialogs = dialogs
+end
+
+function Npc:listenDialog()
+  
 end
 
 return Npc

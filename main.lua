@@ -26,19 +26,19 @@ function love.load()
 
   player = Player()
   player:setCoordinates(320,320)
-  WORLD.addEntity(player)
+  WORLD.ENTITIES:add(player)
 
   npc = Npc('npc1')
   npc:setCoordinates(64,64)
 
-  WORLD.addEntity(npc)
+  WORLD.ENTITIES:add(npc)
 end
 
 function love.draw()
   drawGrid(32)
-  WORLD.drawEntities()
+  WORLD.ENTITIES:draw()
 end
 
 function love.update(dt)
-  WORLD.updateEntities(dt)
+  WORLD.ENTITIES:update(dt)
 end
