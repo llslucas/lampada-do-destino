@@ -1,8 +1,10 @@
 local Character = require 'src.characters.character'
 local Npc = Character:extend()
 
+local Dialog = require 'src.graphics.dialog'
+
 function Npc:new(spriteName, walkInterval)
-  Npc.super.new(self, LG.newImage('assets/img/characters/npc/' .. spriteName .. '.png'), IMAGE_SCALING) 
+  Npc.super.new(self, LG.newImage('assets/img/characters/npc/' .. spriteName .. '.png'), IMAGE_SCALING)
   self.walkInterval = walkInterval or 4
   self.walkTime = 0
   self.dialogs = {}
@@ -38,11 +40,12 @@ end
 function Npc:interact(direction)
   if not self.moving then
     self:turn(direction)
+    self:listenDialog()
   end
 end
 
 function Npc:addDialog(text)
-  table.insert(self.dialogs, text)
+  table.insert(self.dialogs, Dialog('david', text))
 end
 
 function Npc:setDialogs(dialogs)
@@ -50,7 +53,10 @@ function Npc:setDialogs(dialogs)
 end
 
 function Npc:listenDialog()
-  
+  if #self.dialogs >= 1 then
+    WORLD.DIALOGS:add(table.remove(self.dialogs))
+    print(WORLD.DIALOGS[1])
+  end
 end
 
 return Npc

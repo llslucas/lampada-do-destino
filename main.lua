@@ -30,15 +30,26 @@ function love.load()
 
   npc = Npc('npc1')
   npc:setCoordinates(64,64)
+  npc:addDialog('Quem sera esse cara?')
 
   WORLD.ENTITIES:add(npc)
 end
 
 function love.draw()
   drawGrid(32)
+  WORLD.DIALOGS:draw()
   WORLD.ENTITIES:draw()
 end
 
 function love.update(dt)
+  if WORLD.DIALOGS.show then
+    WORLD.DIALOGS:update(dt)
+
+    if love.keyboard.isDown('space') then
+      WORLD.DIALOGS:next()
+    end
+    return
+  end
+
   WORLD.ENTITIES:update(dt)
 end
