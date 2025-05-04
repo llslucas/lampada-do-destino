@@ -1,5 +1,5 @@
-local Image = require 'src.core.image'
-local Character = Image:extend()
+local Entity = require 'src.core.entity'
+local Character = Entity:extend()
 
 local createQuads = require 'src.utils.create-quads'
 
