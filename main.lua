@@ -28,17 +28,31 @@ function love.load()
   player:setCoordinates(320,320)
   WORLD.ENTITIES:add(player)
 
-  npc = Npc('npc1')
+  local npc = Npc('npc1')
   npc:setCoordinates(64,64)
   npc:addDialog('Quem sera esse cara?')
+  WORLD.ENTITIES:add(npc)
 
+  local npc = Npc('npc1')
+  npc:setCoordinates(128,64)
+  npc:addDialog('Quem sera esse cara?')
+  WORLD.ENTITIES:add(npc)
+
+  local npc = Npc('npc1')
+  npc:setCoordinates(64,128)
+  npc:addDialog('Quem sera esse cara?')
+  WORLD.ENTITIES:add(npc)
+
+  local npc = Npc('npc1')
+  npc:setCoordinates(128,128)
+  npc:addDialog('Quem sera esse cara?')
   WORLD.ENTITIES:add(npc)
 end
 
 function love.draw()
   drawGrid(32)
-  WORLD.DIALOGS:draw()
   WORLD.ENTITIES:draw()
+  WORLD.DIALOGS:draw()
 end
 
 function love.update(dt)
