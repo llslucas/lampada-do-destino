@@ -52,6 +52,9 @@ function Character:update(dt)
 end
 
 function Character:setCoordinates(x,y)
+  x = x * BASE_SIZE
+  y = y * BASE_SIZE
+  
   Character.super.setCoordinates(self, x, y)
   self.destinationX = x
   self.destinationY = y
@@ -167,10 +170,10 @@ function Character:checkFutureBorderCollision(destinationX, destinationY)
 
   local screenWidth, screenHeight = LG.getWidth(), LG.getHeight()
 
-  local collision = futureHitbox.x < 0 or
-                    futureHitbox.y < 0 or
-                    futureHitbox.x + futureHitbox.w > screenWidth or
-                    futureHitbox.y + futureHitbox.h > screenHeight
+  local collision = futureHitbox.x < WORLD.MAP.marginLeft or
+                    futureHitbox.y < WORLD.MAP.marginUp or
+                    futureHitbox.x + futureHitbox.w > screenWidth - WORLD.MAP.marginRight or
+                    futureHitbox.y + futureHitbox.h > screenHeight - WORLD.MAP.marginBottom
 
   return collision
 end

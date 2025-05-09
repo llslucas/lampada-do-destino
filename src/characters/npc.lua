@@ -54,7 +54,7 @@ end
 
 function Npc:listenDialog()
   if #self.dialogs >= 1 then
-    WORLD.DIALOGS:add(table.remove(self.dialogs))
+    WORLD.DIALOGS:add(table.remove(self.dialogs, 1))
   end
 end
 

@@ -1,26 +1,18 @@
-local Screen = Object:extend()
+local Map = Object:extend()
 
-local Buttons = require 'src.aggregate.buttons'
-
-function Screen:new(imgPath)
+function Map:new(mapName, marginUp, marginBottom, marginLeft, marginRight)
   self.bg = {}
-  self.bg.img = LG.newImage(imgPath)
-  self.bg.img:setWrap("repeat", "repeat")
-
-  self.bg.width = LG.getWidth()
-  self.bg.height = LG.getHeight()
-  self.bg.scale = self.bg.width / self.bg.img:getWidth()
-
-  self.buttons = Buttons()
+  self.bg.img = LG.newImage('assets/img/maps/' .. mapName .. '.png')
+  self.bg.width = self.bg.img:getWidth()
+  self.bg.height = self.bg.img:getHeight()
+  self.marginUp = marginUp and marginUp * BASE_SIZE or 0
+  self.marginBottom = marginBottom and marginBottom * BASE_SIZE or 0
+  self.marginLeft = marginLeft and marginLeft * BASE_SIZE or 0
+  self.marginRight = marginRight and marginRight * BASE_SIZE or 0
 end
 
-function Screen:draw()
-  LG.draw(self.bg.img, 0, 0, 0, self.bg.scale, self.bg.scale)
-  self.buttons:draw()
+function Map:draw()
+  LG.draw(self.bg.img, 0, 0, 0, IMAGE_SCALING, IMAGE_SCALING)
 end
 
-function Screen:update()
-  self.buttons:update()
-end
-
-return Screen
+return Map

@@ -13,10 +13,10 @@ require 'src.global.world'
 local Player = require 'src.characters.player'
 local Npc = require 'src.characters.npc'
 local drawGrid = require 'src.utils.draw-grid'
-
+local Map = require 'src.core.map'
 
 -- Variáveis locais
-local player, npc
+local player
 
 function love.load()
   math.randomseed(os.time())
@@ -25,31 +25,20 @@ function love.load()
   LG.setBackgroundColor(1,1,1)
 
   player = Player()
-  player:setCoordinates(320,320)
+  player:setCoordinates(9,16)
   WORLD.ENTITIES:add(player)
 
   local npc = Npc('npc1')
-  npc:setCoordinates(64,64)
+  npc:setCoordinates(4,5)
   npc:addDialog('Quem sera esse cara?')
+  npc:addDialog('Nunca vi na vida...')
   WORLD.ENTITIES:add(npc)
 
-  local npc = Npc('npc1')
-  npc:setCoordinates(128,64)
-  npc:addDialog('Quem sera esse cara?')
-  WORLD.ENTITIES:add(npc)
-
-  local npc = Npc('npc1')
-  npc:setCoordinates(64,128)
-  npc:addDialog('Quem sera esse cara?')
-  WORLD.ENTITIES:add(npc)
-
-  local npc = Npc('npc1')
-  npc:setCoordinates(128,128)
-  npc:addDialog('Quem sera esse cara?')
-  WORLD.ENTITIES:add(npc)
+  WORLD.MAP = Map('escritorio1', 5, 3, 3, 3)
 end
 
 function love.draw()
+  WORLD.MAP:draw()
   drawGrid(32)
   WORLD.ENTITIES:draw()
   WORLD.DIALOGS:draw()
