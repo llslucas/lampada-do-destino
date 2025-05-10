@@ -46,6 +46,11 @@ function Entity:setCoordinates(x, y)
   self.y = y * BASE_SIZE
 end
 
+function Entity:setAbsoluteCoordinates(x, y)
+  self.x = x
+  self.y = y
+end
+
 function Entity:getCenter()
   return self:getWidth() / 2, self:getHeight() / 2
 end

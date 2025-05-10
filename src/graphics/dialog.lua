@@ -12,8 +12,8 @@ function Dialog:new(characterName, text)
   self.textTimer = 0
   self.textFinished = false
 
-  self:setCoordinates(BORDER_DISTANCE, LG.getHeight() - self:getHeight() - BORDER_DISTANCE)
-  self.character:setCoordinates(self.x + BORDER_DISTANCE/2, self.y + BORDER_DISTANCE/2)
+  self:setCoordinates(1, 14)
+  self.character:setAbsoluteCoordinates(self.x + BORDER_DISTANCE/2, self.y + BORDER_DISTANCE/2)
 end
 
 function Dialog:draw()
