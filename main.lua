@@ -13,9 +13,6 @@ require 'src.global.world'
 local drawGrid = require 'src.utils.draw-grid'
 local Escritorio = require 'src.maps.escritorio'
 
--- Variáveis locais
-local player
-
 function love.load()
   math.randomseed(os.time())
   LG.setFont(FONTS.NORMAL)
@@ -29,6 +26,7 @@ function love.draw()
   drawGrid(32)
   WORLD.MAP.entities:draw()
   WORLD.DIALOGS:draw()
+  LG.print("FPS: " .. tostring(love.timer.getFPS()), 10, 10)
 end
 
 function love.update(dt)

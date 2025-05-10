@@ -3,6 +3,7 @@ local Player = Character:extend()
 
 function Player:new()
   Player.super.new(self, LG.newImage("assets/img/characters/david-sprite.png"), IMAGE_SCALING)
+  self:setId('player')
 end
 
 function Player:update(dt)

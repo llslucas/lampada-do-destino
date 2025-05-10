@@ -24,7 +24,7 @@ end
 function Npc:walkStrategy()
   --Estratégia padrão: andar aleatoriamente
   local direction = math.random(4)
-  local distance = math.random(3)
+  local distance = 2
 
   if direction == 1 then
     self:walkUp(distance)
