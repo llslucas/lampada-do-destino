@@ -10,7 +10,6 @@ require 'src.global.functions'
 require 'src.global.world'
 
 -- Dependências locais
-local drawGrid = require 'src.utils.draw-grid'
 local Escritorio = require 'src.maps.escritorio'
 local DebugInfo = require 'src.graphics.debug-info'
 
@@ -24,7 +23,6 @@ end
 
 function love.draw()
   WORLD.MAP:draw()
-  drawGrid(32)
   WORLD.MAP.entities:draw()
   WORLD.DIALOGS:draw()
   DebugInfo:draw()

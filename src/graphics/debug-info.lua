@@ -1,7 +1,9 @@
 local DebugInfo = Object:extend()
+local drawGrid = require 'src.utils.draw-grid'
 
 function DebugInfo:draw()
   if DEBUG_MODE then
+    drawGrid(32)
     love.graphics.print("FPS: " .. love.timer.getFPS(), 10, 10)
     local mem = collectgarbage("count")
     love.graphics.print(string.format("Memory: %.2f KB", mem), 10, 30)
