@@ -19,6 +19,14 @@ function Entity:update()
   return
 end
 
+function Entity:keypressed(key)
+  return
+end
+
+function Entity:keyreleased(key)
+  return
+end
+
 function Entity:drawDebugInfo()
   LG.setColor(1, 0, 0, 0.4)
   LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())

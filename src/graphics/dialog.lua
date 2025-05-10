@@ -3,6 +3,7 @@ local Dialog = Entity:extend()
 
 function Dialog:new(characterName, text)
   Dialog.super.new(self, LG.newImage('assets/img/graphics/dialog-box.png'), IMAGE_SCALING)
+  characterName = characterName or 'unknown'
   self.character = Entity(LG.newImage('assets/img/dialog/' .. characterName .. '.png'), IMAGE_SCALING)
 
   self.textTable = type(text) == "table" and text or {text}

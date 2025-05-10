@@ -1,5 +1,6 @@
 local Aggregate = require 'src.aggregate.aggregate'
 local Dialogs = Aggregate:extend()
+local Dialog = require 'src.graphics.dialog'
 
 function Dialogs:new()
   Dialogs.super.new(self)
@@ -17,7 +18,7 @@ function Dialogs:update(dt)
   if self.show and self.objects[self.currentDialog] then
     self.objects[self.currentDialog]:update(dt)
     if love.keyboard.isDown('space') then
-      WORLD.DIALOGS:next()
+      self:next()
     end
   end
 end
@@ -26,6 +27,11 @@ function Dialogs:add(object)
   Dialogs.super.add(self, object)
   self.show = true
   GAME.pause()
+end
+
+function Dialogs:addDialog(character, text)
+  local dialog = Dialog(character, text)
+  self:add(dialog)
 end
 
 function Dialogs:next()

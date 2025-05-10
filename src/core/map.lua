@@ -25,4 +25,16 @@ function Map:update(dt)
   end
 end
 
+function Map:keypressed(key)
+  if GAME.STATE == 'running' then
+    self.entities:keypressed(key)
+  end
+end
+
+function Map:keyreleased(key)
+  if GAME.STATE == 'running' then
+    self.entities:keyreleased(key)
+  end
+end
+
 return Map

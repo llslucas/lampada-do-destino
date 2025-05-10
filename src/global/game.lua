@@ -1,5 +1,6 @@
 GAME = {}
 GAME.STATE = "running"
+GAME.CUTSCENE = false
 
 function GAME.resume()
   GAME.STATE = 'running'

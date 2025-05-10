@@ -14,10 +14,12 @@ end
 function Npc:update(dt)
   Npc.super.update(self, dt)
 
+  if not GAME.CUTSCENE then
   self.walkTime = self.walkTime + dt
-  if self.walkTime > self.walkInterval then
-    self:walkStrategy()
-    self.walkTime = 0
+    if self.walkTime > self.walkInterval and self.walkInterval > 0 then
+      self:walkStrategy()
+      self.walkTime = 0
+    end
   end
 end
 
@@ -44,8 +46,8 @@ function Npc:interact(direction)
   end
 end
 
-function Npc:addDialog(text)
-  table.insert(self.dialogs, Dialog('david', text))
+function Npc:addDialog(character, text)
+  table.insert(self.dialogs, Dialog(character, text))
 end
 
 function Npc:setDialogs(dialogs)
@@ -54,7 +56,7 @@ end
 
 function Npc:listenDialog()
   if #self.dialogs >= 1 then
-    WORLD.DIALOGS:add(table.remove(self.dialogs, 1))
+    WORLD.SCENE.dialogs:add(table.remove(self.dialogs, 1))
   end
 end
 

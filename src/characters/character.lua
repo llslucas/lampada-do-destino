@@ -57,6 +57,11 @@ function Character:setCoordinates(x,y)
   self.destinationY = self.y
 end
 
+function Character:setDestination(x,y)
+  self.destinationX = x * BASE_SIZE
+  self.destinationY = y * BASE_SIZE
+end
+
 function Character:getHeight()
   return Character.super.getHeight(self) / 4
 end
@@ -167,16 +172,16 @@ function Character:checkFutureBorderCollision(destinationX, destinationY)
 
   local screenWidth, screenHeight = LG.getWidth(), LG.getHeight()
 
-  local collision = futureHitbox.x < WORLD.MAP.marginLeft or
-                    futureHitbox.y < WORLD.MAP.marginUp or
-                    futureHitbox.x + futureHitbox.w > screenWidth - WORLD.MAP.marginRight or
-                    futureHitbox.y + futureHitbox.h > screenHeight - WORLD.MAP.marginBottom
+  local collision = futureHitbox.x < WORLD.SCENE.map.marginLeft or
+                    futureHitbox.y < WORLD.SCENE.map.marginUp or
+                    futureHitbox.x + futureHitbox.w > screenWidth - WORLD.SCENE.map.marginRight or
+                    futureHitbox.y + futureHitbox.h > screenHeight - WORLD.SCENE.map.marginBottom
 
   return collision
 end
 
 function Character:checkGlobalCollision(destinationX, destinationY)
-  for _, entity in WORLD.MAP.entities:getItens() do
+  for _, entity in WORLD.SCENE.map.entities:getItens() do
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then

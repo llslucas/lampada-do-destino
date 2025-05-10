@@ -1,8 +1,6 @@
 local Map = require 'src.core.map'
 local Escritorio = Map:extend()
 
-local Npc = require 'src.characters.npc'
-local Player = require 'src.characters.player'
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local MapObject = require 'src.entities.map-object'
@@ -19,12 +17,16 @@ function Escritorio:new()
 
   -- Door 
   local door = Door(9, 18, 2, 1)
-  door:setCollisionCallback(function(self) print('colisão com a porta detectada') end)
   self.entities:add(door)
-  
+
   -- objects 
   local armario = MapObject('armario')
-  armario:setCoordinates(4,4)
+  armario:setCoordinates(4, 4)
+  armario:setInteractionCallBack(
+    function()
+      WORLD.SCENE.dialogs:addDialog('david', 'Preciso abrir este armario...')
+    end
+  )
 
   local estante = MapObject('estante')
   estante:setCoordinates(11, 4)
@@ -33,17 +35,6 @@ function Escritorio:new()
   mesa:setCoordinates(14, 5)
 
   self.entities:add(armario, estante, mesa)
-
-  -- Player location
-  local player = Player()
-  player:setCoordinates(9,15)
-  self.entities:add(player)
-
-  -- NPCs
-  local npc = Npc('npc1')
-  npc:setCoordinates(4, 6)
-  npc:addDialog('Acredito que ja vi este cara antes...')
-  self.entities:add(npc)
 end
 
 return Escritorio
