@@ -13,6 +13,12 @@ function Entity:draw()
   if self.img then
     LG.draw(self.img, self.x, self.y, self.angle, self.scale, self.scale)
   end
+
+  if DRAW_HITBOX then
+    LG.setColor(1, 0, 0, 0.4)
+    LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
+    LG.setColor(1, 1, 1)
+  end
 end
 
 function Entity:setId(id)

@@ -26,6 +26,12 @@ function Character:draw()
     self.scale,
     self.scale
   )
+
+  if DRAW_HITBOX then
+    LG.setColor(1, 0, 0, 0.4)
+    LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
+    LG.setColor(1, 1, 1)
+  end
 end
 
 function Character:update(dt)

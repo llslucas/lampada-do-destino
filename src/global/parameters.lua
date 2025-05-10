@@ -11,4 +11,6 @@ WORD_RENDERING_SPEED = 0.02
 BGM_VOLUME = 0.5
 SFX_VOLUME = 0.5
 
-DRAW_WALLS = false
+
+-- debug parameters
+DRAW_HITBOX = false
