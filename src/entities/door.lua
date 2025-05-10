@@ -11,11 +11,13 @@ function Door:new(x, y, width, height)
 end
 
 function Door:draw()
-  if DRAW_HITBOX then
-    LG.setColor(0, 1, 0, 0.4)
-    LG.rectangle('fill', self.x, self.y, self.width, self.height)
-    LG.setColor(1, 1, 1)
-  end
+  return
+end
+
+function Door:drawDebugInfo()
+  LG.setColor(0, 1, 0, 0.4)
+  LG.rectangle('fill', self.x, self.y, self.width, self.height)
+  LG.setColor(1, 1, 1)
 end
 
 function Door:update()

@@ -27,6 +27,9 @@ end
 function Aggregate:draw()
   for _, object in ipairs(self.objects) do
     object:draw()
+    if DEBUG_MODE then 
+      object:drawDebugInfo()
+    end
   end
 end
 

@@ -26,12 +26,6 @@ function Character:draw()
     self.scale,
     self.scale
   )
-
-  if DRAW_HITBOX then
-    LG.setColor(1, 0, 0, 0.4)
-    LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
-    LG.setColor(1, 1, 1)
-  end
 end
 
 function Character:update(dt)
@@ -189,7 +183,9 @@ function Character:checkGlobalCollision(destinationX, destinationY)
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then
-        entity:collisionCallback()
+        if self.id == 'player' then
+          entity:collisionCallback()
+        end
         return collision
       end
     end

@@ -12,4 +12,4 @@ BGM_VOLUME = 0.5
 SFX_VOLUME = 0.5
 
 -- debug parameters
-DRAW_HITBOX = true
+DEBUG_MODE = false

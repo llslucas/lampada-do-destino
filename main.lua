@@ -12,6 +12,7 @@ require 'src.global.world'
 -- Dependências locais
 local drawGrid = require 'src.utils.draw-grid'
 local Escritorio = require 'src.maps.escritorio'
+local DebugInfo = require 'src.graphics.debug-info'
 
 function love.load()
   math.randomseed(os.time())
@@ -26,7 +27,7 @@ function love.draw()
   drawGrid(32)
   WORLD.MAP.entities:draw()
   WORLD.DIALOGS:draw()
-  LG.print("FPS: " .. tostring(love.timer.getFPS()), 10, 10)
+  DebugInfo:draw()
 end
 
 function love.update(dt)
