@@ -15,6 +15,7 @@ local Npc = require 'src.characters.npc'
 local drawGrid = require 'src.utils.draw-grid'
 local Map = require 'src.core.map'
 local InvisibleWall = require 'src.entities.invisible-wall'
+local Door = require 'src.entities.door'
 
 -- Variáveis locais
 local player
@@ -42,6 +43,15 @@ function love.load()
   WORLD.ENTITIES:add(InvisibleWall(2,17, 7,1))
   WORLD.ENTITIES:add(InvisibleWall(11,17, 7,1))
   WORLD.ENTITIES:add(InvisibleWall(17,5, 1,12))
+  WORLD.ENTITIES:add(InvisibleWall(17,5, 1,12))
+
+  local door = Door(9,18, 2,1)
+
+  local test = function(self) print("teste") end
+
+  door:setInteractionCallBack(test)
+
+  WORLD.ENTITIES:add(door)
 end
 
 function love.draw()

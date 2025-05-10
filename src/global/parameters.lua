@@ -13,4 +13,4 @@ SFX_VOLUME = 0.5
 
 
 -- debug parameters
-DRAW_HITBOX = false
+DRAW_HITBOX = true

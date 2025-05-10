@@ -109,4 +109,8 @@ function Entity:interact()
   return
 end
 
+function Entity:setInteractionCallBack(callback)
+  self.interact = callback
+end
+
 return Entity
