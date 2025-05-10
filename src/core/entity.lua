@@ -15,6 +15,10 @@ function Entity:draw()
   end
 end
 
+function Entity:setId(id)
+  self.id = id
+end
+
 function Entity:getHeight()
   if self.img then
     return math.floor(self.img:getHeight() * self.scale)
