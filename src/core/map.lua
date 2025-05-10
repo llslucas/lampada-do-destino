@@ -20,7 +20,7 @@ function Map:draw()
 end
 
 function Map:update(dt)
-  if not WORLD.DIALOGS.show then
+  if GAME.STATE == 'running' then
     self.entities:update(dt)
   end
 end

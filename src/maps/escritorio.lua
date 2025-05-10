@@ -21,7 +21,7 @@ function Escritorio:new()
   local door = Door(9, 18, 2, 1)
   door:setCollisionCallback(function(self) print('colisão com a porta detectada') end)
   self.entities:add(door)
-
+  
   -- objects 
   local armario = MapObject('armario')
   armario:setCoordinates(4,4)
