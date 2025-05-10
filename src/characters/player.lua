@@ -26,7 +26,7 @@ function Player:update(dt)
 end
 
 function Player:interact()
-  for _, entity in WORLD.ENTITIES:getItens() do
+  for _, entity in WORLD.MAP.entities:getItens() do
     local collision, direction = self:checkCollision(entity)
     if collision and self.id ~= entity.id then
       entity:interact(direction)

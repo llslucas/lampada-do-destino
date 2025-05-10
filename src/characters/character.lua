@@ -185,10 +185,11 @@ function Character:checkFutureBorderCollision(destinationX, destinationY)
 end
 
 function Character:checkGlobalCollision(destinationX, destinationY)
-  for _, entity in WORLD.ENTITIES:getItens() do
+  for _, entity in WORLD.MAP.entities:getItens() do
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then
+        entity:collisionCallback()
         return collision
       end
     end

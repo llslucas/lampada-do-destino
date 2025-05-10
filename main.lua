@@ -10,12 +10,8 @@ require 'src.global.functions'
 require 'src.global.world'
 
 -- Dependências locais
-local Player = require 'src.characters.player'
-local Npc = require 'src.characters.npc'
 local drawGrid = require 'src.utils.draw-grid'
-local Map = require 'src.core.map'
-local InvisibleWall = require 'src.entities.invisible-wall'
-local Door = require 'src.entities.door'
+local Escritorio = require 'src.maps.escritorio'
 
 -- Variáveis locais
 local player
@@ -23,41 +19,15 @@ local player
 function love.load()
   math.randomseed(os.time())
   LG.setFont(FONTS.NORMAL)
-
   LG.setBackgroundColor(1,1,1)
 
-  player = Player()
-  player:setCoordinates(9,16)
-  WORLD.ENTITIES:add(player)
-
-  local npc = Npc('npc1')
-  npc:setCoordinates(4,5)
-  npc:addDialog('Quem sera esse cara?')
-  npc:addDialog('Nunca vi na vida...')
-  
-  WORLD.ENTITIES:add(npc)
-
-  WORLD.MAP = Map('escritorio')
-  WORLD.ENTITIES:add(InvisibleWall(2,4, 16,1))
-  WORLD.ENTITIES:add(InvisibleWall(2,5, 1,12))
-  WORLD.ENTITIES:add(InvisibleWall(2,17, 7,1))
-  WORLD.ENTITIES:add(InvisibleWall(11,17, 7,1))
-  WORLD.ENTITIES:add(InvisibleWall(17,5, 1,12))
-  WORLD.ENTITIES:add(InvisibleWall(17,5, 1,12))
-
-  local door = Door(9,18, 2,1)
-
-  local test = function(self) print("teste") end
-
-  door:setInteractionCallBack(test)
-
-  WORLD.ENTITIES:add(door)
+  WORLD.MAP = Escritorio()
 end
 
 function love.draw()
   WORLD.MAP:draw()
   drawGrid(32)
-  WORLD.ENTITIES:draw()
+  WORLD.MAP.entities:draw()
   WORLD.DIALOGS:draw()
 end
 
@@ -71,5 +41,5 @@ function love.update(dt)
     return
   end
 
-  WORLD.ENTITIES:update(dt)
+  WORLD.MAP.entities:update(dt)
 end

@@ -1,4 +1,5 @@
 local Map = Object:extend()
+local Aggregate = require 'src.aggregate.aggregate'
 
 function Map:new(mapName, marginUp, marginBottom, marginLeft, marginRight)
   self.bg = {}
@@ -9,6 +10,8 @@ function Map:new(mapName, marginUp, marginBottom, marginLeft, marginRight)
   self.marginBottom = marginBottom and marginBottom * BASE_SIZE or 0
   self.marginLeft = marginLeft and marginLeft * BASE_SIZE or 0
   self.marginRight = marginRight and marginRight * BASE_SIZE or 0
+
+  self.entities = Aggregate()
 end
 
 function Map:draw()

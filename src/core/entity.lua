@@ -113,4 +113,12 @@ function Entity:setInteractionCallBack(callback)
   self.interact = callback
 end
 
+function Entity:collisionCallback()
+  return
+end
+
+function Entity:setCollisionCallback(callback)
+  self.collisionCallback = callback
+end
+
 return Entity
