@@ -23,20 +23,11 @@ end
 
 function love.draw()
   WORLD.MAP:draw()
-  WORLD.MAP.entities:draw()
   WORLD.DIALOGS:draw()
   DebugInfo:draw()
 end
 
 function love.update(dt)
-  if WORLD.DIALOGS.show then
-    WORLD.DIALOGS:update(dt)
-
-    if love.keyboard.isDown('space') then
-      WORLD.DIALOGS:next()
-    end
-    return
-  end
-
-  WORLD.MAP.entities:update(dt)
+  WORLD.MAP:update(dt)
+  WORLD.DIALOGS:update(dt)
 end

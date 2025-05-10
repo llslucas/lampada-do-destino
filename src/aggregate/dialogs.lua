@@ -16,6 +16,9 @@ end
 function Dialogs:update(dt)
   if self.show and self.objects[self.currentDialog] then
     self.objects[self.currentDialog]:update(dt)
+    if love.keyboard.isDown('space') then
+      WORLD.DIALOGS:next()
+    end
   end
 end
 

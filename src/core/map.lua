@@ -16,6 +16,13 @@ end
 
 function Map:draw()
   LG.draw(self.bg.img, 0, 0, 0, IMAGE_SCALING, IMAGE_SCALING)
+  self.entities:draw()
+end
+
+function Map:update(dt)
+  if not WORLD.DIALOGS.show then
+    self.entities:update(dt)
+  end
 end
 
 return Map
