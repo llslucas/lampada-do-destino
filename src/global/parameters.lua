@@ -12,4 +12,4 @@ BGM_VOLUME = 0.5
 SFX_VOLUME = 0.5
 
 -- debug parameters
-DEBUG_MODE = true
+DEBUG_MODE = false

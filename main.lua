@@ -31,3 +31,9 @@ function love.update(dt)
   WORLD.MAP:update(dt)
   WORLD.DIALOGS:update(dt)
 end
+
+function love.keypressed(key)
+  if key == 'f9' then
+    DEBUG_MODE = not DEBUG_MODE
+  end
+end
