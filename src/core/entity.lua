@@ -15,6 +15,10 @@ function Entity:draw()
   end
 end
 
+function Entity:update()
+  return
+end
+
 function Entity:drawDebugInfo()
   LG.setColor(1, 0, 0, 0.4)
   LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
@@ -38,8 +42,8 @@ function Entity:getWidth()
 end
 
 function Entity:setCoordinates(x, y)
-  self.x = x
-  self.y = y
+  self.x = x * BASE_SIZE
+  self.y = y * BASE_SIZE
 end
 
 function Entity:getCenter()

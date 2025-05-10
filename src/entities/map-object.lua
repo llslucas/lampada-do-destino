@@ -5,7 +5,7 @@ local MapObject = Entity:extend()
 function MapObject:new(imgName)
   MapObject.super.new(self)
   self.id = imgName
-  self.img = LG.newImage('src/img/objects/' .. imgName .. '.png')
+  self.img = LG.newImage('assets/img/objects/' .. imgName .. '.png')
 end
 
 return MapObject

@@ -12,8 +12,10 @@ function Aggregate:clear()
   self.objects = {}
 end
 
-function Aggregate:add(object)
-  table.insert(self.objects, object)
+function Aggregate:add(...)
+  for _, object in ipairs({...}) do
+    table.insert(self.objects, object)
+  end
 end
 
 function Aggregate:remove(position)
@@ -27,7 +29,7 @@ end
 function Aggregate:draw()
   for _, object in ipairs(self.objects) do
     object:draw()
-    if DEBUG_MODE then 
+    if DEBUG_MODE then
       object:drawDebugInfo()
     end
   end

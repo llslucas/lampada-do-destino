@@ -52,12 +52,9 @@ function Character:update(dt)
 end
 
 function Character:setCoordinates(x,y)
-  x = x * BASE_SIZE
-  y = y * BASE_SIZE
-  
   Character.super.setCoordinates(self, x, y)
-  self.destinationX = x
-  self.destinationY = y
+  self.destinationX = self.x
+  self.destinationY = self.y
 end
 
 function Character:getHeight()

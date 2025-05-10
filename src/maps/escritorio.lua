@@ -5,6 +5,7 @@ local Npc = require 'src.characters.npc'
 local Player = require 'src.characters.player'
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
+local MapObject = require 'src.entities.map-object'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'escritorio')
@@ -20,6 +21,18 @@ function Escritorio:new()
   local door = Door(9, 18, 2, 1)
   door:setCollisionCallback(function(self) print('colisão com a porta detectada') end)
   self.entities:add(door)
+
+  -- objects 
+  local armario = MapObject('armario')
+  armario:setCoordinates(4,4)
+
+  local estante = MapObject('estante')
+  estante:setCoordinates(11, 4)
+
+  local mesa = MapObject('mesa')
+  mesa:setCoordinates(14, 5)
+
+  self.entities:add(armario, estante, mesa)
 
   -- Player location
   local player = Player()
