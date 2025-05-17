@@ -40,8 +40,22 @@ function Escritorio:new()
   )
 
   -- objects 
-  local armarioDavid = Armario(2, 12)
-  local armarioAdam = Armario(17, 12)
+  local armarioAdam = Armario(2, 12, 'armario-adam')
+  armarioAdam:setPostOpenCallback(
+    function()
+      WORLD.SCENE.dialogs:addDialog('david', 'Tem uma caixa aqui.')
+    end
+  )
+
+  local armarioDavid = Armario(17, 12, 'armario-david')
+  armarioDavid:setPostOpenCallback(
+    function()
+      WORLD.SCENE.dialogs:addDialog('david', 'Este e o meu armario')
+    end
+  )
+
+ 
+
   self.entities:add(armarioDavid, armarioAdam)
 end
 

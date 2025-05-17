@@ -45,7 +45,7 @@ function Scene:new()
   self:addEvent(function() manager:setDestination(9,13) end)
   self:addEvent(function() manager:setDestination(9,6) end)
   self:addEvent(function() manager:setDestination(1,6) end)
-  
+
   self:addEvent(function() self.map.entities:remove(manager) end)
   self:addEvent(function() GAME.CUTSCENE = false end)
 
