@@ -4,6 +4,7 @@ local Escritorio = Map:extend()
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local MapObject = require 'src.entities.map-object'
+local Armario = require 'src.entities.armario'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'escritorio')
@@ -18,15 +19,15 @@ function Escritorio:new()
   -- Door 
   local door = Door(9, 18, 2, 1)
   self.entities:add(door)
-
-  -- objects 
-  local armario = MapObject('armario')
-  armario:setCoordinates(4, 4)
-  armario:setInteractionCallBack(
+  door:setCollisionCallback(
     function()
-      WORLD.SCENE.dialogs:addDialog('david', 'Preciso abrir este armario...')
+      GAME.pause()
+      WORLD.SCENE.dialogs:addDialog('david', 'Nao posso sair daqui ainda...')
     end
   )
+
+  -- objects 
+  local armario = Armario(4, 4)
 
   local estante = MapObject('estante')
   estante:setCoordinates(11, 4)

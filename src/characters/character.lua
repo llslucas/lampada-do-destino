@@ -185,9 +185,6 @@ function Character:checkGlobalCollision(destinationX, destinationY)
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then
-        if self.id == 'player' then
-          entity:collisionCallback()
-        end
         return collision
       end
     end
