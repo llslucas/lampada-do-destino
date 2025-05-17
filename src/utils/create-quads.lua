@@ -11,16 +11,19 @@ local function createQuads(image, columns, rows, xmargin, ymargin)
   xmargin = xmargin or 0
   ymargin = ymargin or 0
 
-  for y = 0, rows - 1 do
+  for y = 1, rows do
     table.insert(quads, {})
-    for x = 0, columns - 1 do
+    for x = 1, columns do
+      local dx = x-1
+      local dy = y-1
+
       table.insert(
-        quads[y + 1],
+        quads[y],
         LG.newQuad(
-          (x * width) + (x == 0 and 0 or xmargin),
-          (y * height) + (y == 0 and 0 or ymargin),
-          width - (x == 0 and 0 or xmargin),
-          height - (y == 0 and 0 or ymargin),
+          (dx * width) + (dx == 0 and 0 or xmargin),
+          (dy * height) + (dy == 0 and 0 or ymargin),
+          width - (dx == 0 and 0 or xmargin),
+          height - (dy == 0 and 0 or ymargin),
           imageWidth,
           imageHeight
         )

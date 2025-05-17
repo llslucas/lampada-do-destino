@@ -14,8 +14,6 @@ function Scene:new()
 
   self.map = Escritorio()
 
-  GAME.CUTSCENE = true
-
   player = Player()
   player:setCoordinates(11, 6)
   player:turn('up')
@@ -25,9 +23,10 @@ function Scene:new()
   manager:setCoordinates(9, 16)
   manager:turn('up')
 
-  manager:addDialog(nil, 'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
+  manager:addDialog('gerente', 'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
   manager:addDialog('david', '** Promovido? Transferido? Estranho, ele nao me disse nada sobre isso. **')
 
+  GAME.CUTSCENE = true
   self:addEvent(function() manager:setDestination(9,14) end)
   self:addEvent(function() manager:setDestination(11,14) end)
   self:addEvent(function() manager:setDestination(11,8) end)
@@ -50,6 +49,7 @@ function Scene:resumeCoroutine()
     Scene.super.resumeCoroutine(self)
   end
 end
+
 return Scene
 
 
