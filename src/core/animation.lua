@@ -2,17 +2,17 @@ local Animation = Object:extend()
 
 local createQuads = require 'src.utils.create-quads'
 
-function Animation:new(img, columns, rows)
+function Animation:new(img, columns, rows, interval)
   self.img = img
   self.frames = createQuads(img, columns, rows)
   self.currentFrame = 1
   self.currentAnimation = 1
   self.timer = 0
-  self.interval = 0.2
+  self.interval = interval or 0.2
   self.x = 0
   self.y = 0
   self.angle = 0
-  self.scale = 1
+  self.scale = IMAGE_SCALING
 end
 
 function Animation:draw()
@@ -36,8 +36,8 @@ function Animation:update(dt)
 end
 
 function Animation:setCoordinates(x, y)
-  self.x = x
-  self.y = y
+  self.x = x * BASE_SIZE
+  self.y = y * BASE_SIZE
 end
 
 function Animation:setAngle(angle)
