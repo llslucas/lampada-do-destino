@@ -17,9 +17,18 @@ end
 function Dialogs:update(dt)
   if self.show and self.objects[self.currentDialog] then
     self.objects[self.currentDialog]:update(dt)
-    if love.keyboard.isDown('space') then
-      self:next()
-    end
+  end
+end
+
+function Dialogs:keypressed(key)
+  if self.show then
+    if key == 'space' then
+        if self.objects[self.currentDialog].textFinished then
+          self:next()
+        else
+          self.objects[self.currentDialog].textSpeed = 0
+        end
+      end
   end
 end
 
@@ -35,15 +44,13 @@ function Dialogs:addDialog(character, text)
 end
 
 function Dialogs:next()
-  if self.objects[self.currentDialog].textFinished then
-    self.currentDialog = self.currentDialog + 1
+  self.currentDialog = self.currentDialog + 1
 
-    if self.currentDialog > #self.objects then
-      self:clear()
-      self.currentDialog = 1
-      self.show = false
-      GAME.resume()
-    end
+  if self.currentDialog > #self.objects then
+    self:clear()
+    self.currentDialog = 1
+    self.show = false
+    GAME.resume()
   end
 end
 

@@ -23,10 +23,12 @@ end
 
 function GenericScene:keypressed(key)
   self.map:keypressed(key)
+  self.dialogs:keypressed(key)
 end
 
 function GenericScene:keyreleased(key)
   self.map:keyreleased(key)
+  self.dialogs:keyreleased(key)
 end
 
 function GenericScene:addEvent(event)
