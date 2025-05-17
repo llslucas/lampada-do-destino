@@ -15,27 +15,37 @@ function Scene:new()
   self.map = Escritorio()
 
   player = Player()
-  player:setCoordinates(11, 6)
+  player:setCoordinates(13, 13)
   player:turn('up')
   self.map.entities:add(player)
 
   manager = Npc('manager')
-  manager:setCoordinates(9, 16)
-  manager:turn('up')
+  manager:setCoordinates(1, 6)
+  manager:turn('right')
 
   manager:addDialog('gerente', 'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
   manager:addDialog('david', '** Promovido? Transferido? Estranho, ele nao me disse nada sobre isso. **')
 
   GAME.CUTSCENE = true
-  self:addEvent(function() manager:setDestination(9,14) end)
-  self:addEvent(function() manager:setDestination(11,14) end)
-  self:addEvent(function() manager:setDestination(11,8) end)
-  self:addEvent(function() player:turn('down') end)
+
+  --Manager walk towards David
+  self:addEvent(function() manager:setDestination(9,6) end)
+  self:addEvent(function() manager:setDestination(9,13) end)
+  self:addEvent(function() manager:setDestination(11,13) end)
+
+  --David turns to Manager
+  self:addEvent(function() player:turn('left') end)
+
+  --Manager starts to talk
   self:addEvent(function() manager:listenDialog() end)
   self:addEvent(function() manager:listenDialog() end)
-  self:addEvent(function() manager:setDestination(11,14) end)
-  self:addEvent(function() manager:setDestination(9,16) end)
-  self:addEvent(function() manager:setDestination(9,16) end)
+
+  --Manager quits
+  self:addEvent(function() manager:setDestination(11,13) end)
+  self:addEvent(function() manager:setDestination(9,13) end)
+  self:addEvent(function() manager:setDestination(9,6) end)
+  self:addEvent(function() manager:setDestination(1,6) end)
+  
   self:addEvent(function() self.map.entities:remove(manager) end)
   self:addEvent(function() GAME.CUTSCENE = false end)
 
