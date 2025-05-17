@@ -32,9 +32,9 @@ function Escritorio:new()
   -- Door 
   local door = Door(0,6, 1, 2)
   self.entities:add(door)
+
   door:setCollisionCallback(
     function()
-      GAME.pause()
       WORLD.SCENE.dialogs:addDialog('david', 'Nao posso sair daqui ainda...')
     end
   )

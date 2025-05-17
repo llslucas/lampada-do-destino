@@ -8,8 +8,8 @@ end
 
 function Player:update(dt)
   self.super.update(self, dt)
-  
-  if not GAME.CUTSCENE then
+
+  if not GAME.CUTSCENE and not self.moving then
     if love.keyboard.isDown('up') then
       self:walkUp()
     elseif love.keyboard.isDown('down') then
@@ -24,6 +24,14 @@ function Player:update(dt)
   end
 end
 
+function Player:keypressed(key)
+  if not GAME.CUTSCENE then
+    if key == 'space' then
+      self:interact()
+    end
+  end
+end
+
 function Player:interact()
   for _, entity in WORLD.SCENE.map.entities:getItens() do
     local collision, direction = self:checkCollision(entity)
@@ -33,12 +41,19 @@ function Player:interact()
   end
 end
 
-function Player:keypressed(key)
-  if not GAME.CUTSCENE then
-    if key == 'space' then
-      self:interact()
+function Player:checkGlobalCollision(destinationX, destinationY)
+    for _, entity in WORLD.SCENE.map.entities:getItens() do
+    if self.id ~= entity.id then
+      local collision = self:checkFutureCollision(entity, destinationX, destinationY)
+      if collision then
+        entity:collisionCallback()
+        return collision
+      end
     end
   end
+
+  return self:checkFutureBorderCollision(destinationX, destinationY)
 end
+
 
 return Player

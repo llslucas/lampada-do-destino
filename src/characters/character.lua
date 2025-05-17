@@ -32,7 +32,7 @@ function Character:update(dt)
   local offset = self.speed * dt
   self.moving = false
 
-  if self.destinationX ~= self.x then 
+  if self.destinationX ~= self.x then
     self:moveX(offset)
   end
 
@@ -47,7 +47,9 @@ function Character:update(dt)
       self.timer = 0
     end
   else
-    self.currentFrame = 1
+    if self.currentFrame % 2 == 0 then
+      self.currentFrame = (self.currentFrame % #self.quads[1]) + 1
+    end
   end
 end
 
