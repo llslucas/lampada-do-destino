@@ -1,7 +1,7 @@
 local Character = require 'src.characters.character'
 local Npc = Character:extend()
 
-local Dialog = require 'src.graphics.dialog'
+local Dialog = require 'src.graphics.dialog-box'
 
 function Npc:new(spriteName, walkInterval)
   Npc.super.new(self, LG.newImage('assets/img/characters/npc/' .. spriteName .. '.png'), IMAGE_SCALING)

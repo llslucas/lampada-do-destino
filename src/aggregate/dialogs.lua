@@ -1,6 +1,7 @@
 local Aggregate = require 'src.aggregate.aggregate'
 local Dialogs = Aggregate:extend()
-local Dialog = require 'src.graphics.dialog'
+local Dialog = require 'src.graphics.dialog-box'
+local ImageBox = require 'src.graphics.image-box'
 
 function Dialogs:new()
   Dialogs.super.new(self)
@@ -23,7 +24,7 @@ end
 function Dialogs:keypressed(key)
   if self.show then
     if key == 'space' then
-        if self.objects[self.currentDialog].textFinished then
+        if self.objects[self.currentDialog].textFinished or self.objects[self.currentDialog]:is(ImageBox) then
           self:next()
         else
           self.objects[self.currentDialog].textSpeed = 0
@@ -41,6 +42,11 @@ end
 function Dialogs:addDialog(character, text)
   local dialog = Dialog(character, text)
   self:add(dialog)
+end
+
+function Dialogs:addImage(photoName)
+  local imageBox = ImageBox(photoName)
+  self:add(imageBox)
 end
 
 function Dialogs:next()

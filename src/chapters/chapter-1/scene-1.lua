@@ -6,7 +6,7 @@ local Escritorio = require 'src.maps.escritorio'
 local Player = require 'src.characters.player'
 local Npc = require 'src.characters.npc'
 
-local player, manager
+local player, manager, armarioAdam
 
 function Scene:new()
   --Scene setup
@@ -17,14 +17,31 @@ function Scene:new()
   player = Player()
   player:setCoordinates(13, 13)
   player:turn('up')
-  self.map.entities:add(player)
 
   manager = Npc('manager')
   manager:setCoordinates(1, 6)
   manager:turn('right')
 
+  self.map.entities:add(player, manager)
+
   manager:addDialog('gerente', 'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
   manager:addDialog('david', '** Promovido? Transferido? Estranho, ele nao me disse nada sobre isso. **')
+
+  armarioAdam = self.map.entities:getItemById('armario-adam')
+
+  armarioAdam:setPostOpenCallback(
+    function(self)
+      WORLD.SCENE.dialogs:addDialog('david', 'Tem uma caixa aqui, ela contem os pertences do Adam, o que sera que ele deixou para tras?')
+      WORLD.SCENE.dialogs:addDialog('empty', '** David retira a caixa do armario e a abre, encontrando uma lampada e dois papeis. **')
+      WORLD.SCENE.dialogs:addDialog('david', 'Vamos ver o que temos aqui...')
+      WORLD.SCENE.dialogs:addDialog('david', 'Uma lampada? Que esquisito...')
+      WORLD.SCENE.dialogs:addImage('lampada')
+      WORLD.SCENE.dialogs:addDialog('david', 'Tambem ha alguns papeis...')
+      self:removePostOpenCallback()
+    end
+  )
+
+  --Events init
 
   GAME.CUTSCENE = true
 
@@ -50,8 +67,6 @@ function Scene:new()
   self:addEvent(function() GAME.CUTSCENE = false end)
 
   self:makeCoroutine()
-
-  self.map.entities:add(manager)
 end
 
 function Scene:resumeCoroutine()

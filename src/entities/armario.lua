@@ -30,4 +30,12 @@ function Armario:setPostOpenCallback(callback)
   self.postOpenCallback = callback
 end
 
+function Armario:removePostOpenCallback()
+  self:setPostOpenCallback(
+    function ()
+      return
+    end
+  )
+end
+
 return Armario

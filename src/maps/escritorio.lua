@@ -39,24 +39,17 @@ function Escritorio:new()
     end
   )
 
-  -- objects 
-  local armarioAdam = Armario(2, 12, 'armario-adam')
-  armarioAdam:setPostOpenCallback(
-    function()
-      WORLD.SCENE.dialogs:addDialog('david', 'Tem uma caixa aqui.')
-    end
-  )
+  -- objects
+  local armarioAdam = Armario(2, 12, 'armario-adam')  
 
   local armarioDavid = Armario(17, 12, 'armario-david')
   armarioDavid:setPostOpenCallback(
     function()
-      WORLD.SCENE.dialogs:addDialog('david', 'Este e o meu armario')
+      WORLD.SCENE.dialogs:addDialog('david', 'Este e meu armario.')
     end
   )
 
- 
-
-  self.entities:add(armarioDavid, armarioAdam)
+  self.entities:add(armarioAdam, armarioDavid)
 end
 
 return Escritorio

@@ -1,5 +1,4 @@
 local Animation = Object:extend()
-
 local createQuads = require 'src.utils.create-quads'
 
 function Animation:new(img, columns, rows, interval)
