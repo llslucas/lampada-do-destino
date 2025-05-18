@@ -1,4 +1,6 @@
--- Capítulo 1 - Abertura do jogo
+-- Capítulo 1 - Prólogo
+-- Cena 1 - Notícia repentina
+
 local GenericScene = require 'src.core.generic-scene'
 local Scene = GenericScene:extend()
 
@@ -24,20 +26,27 @@ function Scene:new()
 
   self.map.entities:add(player, manager)
 
-  manager:addDialog('gerente', 'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
+  manager:addDialog('gerente',
+    'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
   manager:addDialog('david', '** Promovido? Transferido? Estranho, ele nao me disse nada sobre isso. **')
 
   armarioAdam = self.map.entities:getItemById('armario-adam')
 
   armarioAdam:setPostOpenCallback(
-    function(self)
-      WORLD.SCENE.dialogs:addDialog('david', 'Tem uma caixa aqui, ela contem os pertences do Adam, o que sera que ele deixou para tras?')
-      WORLD.SCENE.dialogs:addDialog('empty', '** David retira a caixa do armario e a abre, encontrando uma lampada e dois papeis. **')
-      WORLD.SCENE.dialogs:addDialog('david', 'Vamos ver o que temos aqui...')
-      WORLD.SCENE.dialogs:addDialog('david', 'Uma lampada? Que esquisito...')
-      WORLD.SCENE.dialogs:addImage('lampada')
-      WORLD.SCENE.dialogs:addDialog('david', 'Tambem ha alguns papeis...')
-      self:removePostOpenCallback()
+    function()
+      self.dialogs:addDialog('david',
+        'Tem uma caixa aqui, ela contem os pertences do Adam, o que sera que ele deixou para tras?')
+      self.dialogs:addDialog('empty',
+        '** David retira a caixa do armario e a abre, encontrando uma lampada, uma foto e dois papeis. **')
+      self.dialogs:addDialog('david', 'Vamos ver o que temos aqui...')
+      self.dialogs:addImage('lampada')
+      self.dialogs:addDialog('david', 'Uma lampada? Que esquisito...')
+      self.dialogs:addImage('nisus')
+      self.dialogs:addDialog('david', 'Nisus? Ja ouvi falar desse navio, e da Celestia...')
+      self.dialogs:addDialog('david', 'Por fim temos dois papeis...')
+      
+      self:addEvent(function() WORLD.STORYMANAGER:advanceScene(self.map) end)
+      self:makeCoroutine()
     end
   )
 
@@ -46,9 +55,9 @@ function Scene:new()
   GAME.CUTSCENE = true
 
   --Manager walk towards David
-  self:addEvent(function() manager:setDestination(9,6) end)
-  self:addEvent(function() manager:setDestination(9,13) end)
-  self:addEvent(function() manager:setDestination(11,13) end)
+  self:addEvent(function() manager:setDestination(9, 6) end)
+  self:addEvent(function() manager:setDestination(9, 13) end)
+  self:addEvent(function() manager:setDestination(11, 13) end)
 
   --David turns to Manager
   self:addEvent(function() player:turn('left') end)
@@ -58,13 +67,16 @@ function Scene:new()
   self:addEvent(function() manager:listenDialog() end)
 
   --Manager quits
-  self:addEvent(function() manager:setDestination(11,13) end)
-  self:addEvent(function() manager:setDestination(9,13) end)
-  self:addEvent(function() manager:setDestination(9,6) end)
-  self:addEvent(function() manager:setDestination(1,6) end)
+  self:addEvent(function() manager:setDestination(11, 13) end)
+  self:addEvent(function() manager:setDestination(9, 13) end)
+  self:addEvent(function() manager:setDestination(9, 6) end)
+  self:addEvent(function() manager:setDestination(1, 6) end)
 
   self:addEvent(function() self.map.entities:remove(manager) end)
-  self:addEvent(function() GAME.CUTSCENE = false end)
+  self:addEvent(function()
+    GAME.CUTSCENE = false
+    self:clearEvents()
+  end)
 
   self:makeCoroutine()
 end
@@ -76,6 +88,3 @@ function Scene:resumeCoroutine()
 end
 
 return Scene
-
-
-

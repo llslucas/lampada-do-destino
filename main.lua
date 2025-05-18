@@ -11,29 +11,35 @@ require 'src.global.world'
 
 -- Dependências locais
 local DebugInfo = require 'src.graphics.debug-info'
-local Scene = require 'src.chapters.chapter-1.scene-1'
+local StoryManager = require 'src.chapters.storymanager'
 
 function love.load()
   math.randomseed(os.time())
   LG.setFont(FONTS.NORMAL)
   LG.setBackgroundColor(1,1,1)
 
-  WORLD.SCENE = Scene()
+  WORLD.STORYMANAGER = StoryManager()
 end
 
 function love.draw()
-  WORLD.SCENE:draw()
+  if WORLD.SCENE then
+    WORLD.SCENE:draw()
+  end
   DebugInfo:draw()
 end
 
 function love.update(dt)
-  WORLD.SCENE:update(dt)
+  if WORLD.SCENE then
+    WORLD.SCENE:update(dt)
+  end
 end
 
 function love.keypressed(key)
   if key == 'f9' then
     DEBUG_MODE = not DEBUG_MODE
   else
-    WORLD.SCENE:keypressed(key)
+    if WORLD.SCENE then
+      WORLD.SCENE:keypressed(key)
+    end
   end
 end

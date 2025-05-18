@@ -1,12 +1,30 @@
 local Character = require 'src.characters.character'
 local Player = Character:extend()
 
+local DavidLampada = require 'src.animations.david-lampada'
+
 function Player:new()
   Player.super.new(self, LG.newImage("assets/img/characters/david-sprite.png"), IMAGE_SCALING)
   self:setId('player')
+  self.animations = { DavidLampada() }
+  self.showAnimation = false
+  self.currentAnimation = 1
+end
+
+function Player:draw()
+  if self.showAnimation then
+    self.animations[self.currentAnimation]:draw()
+  else
+    Player.super.draw(self)
+  end
 end
 
 function Player:update(dt)
+  if self.showAnimation then
+    self.animations[self.currentAnimation]:update(dt)
+    return
+  end
+
   self.super.update(self, dt)
 
   if not GAME.CUTSCENE and not self.moving then
@@ -42,7 +60,7 @@ function Player:interact()
 end
 
 function Player:checkGlobalCollision(destinationX, destinationY)
-    for _, entity in WORLD.SCENE.map.entities:getItens() do
+  for _, entity in WORLD.SCENE.map.entities:getItens() do
     if self.id ~= entity.id then
       local collision = self:checkFutureCollision(entity, destinationX, destinationY)
       if collision then
@@ -55,5 +73,14 @@ function Player:checkGlobalCollision(destinationX, destinationY)
   return self:checkFutureBorderCollision(destinationX, destinationY)
 end
 
+function Player:playAnimation(animation)
+  self.currentAnimation = animation
+  self.animations[animation]:setCoordinates(self.x, self.y)
+  self.showAnimation = true
+end
+
+function Player:stopAnimation()
+  self.showAnimation = false
+end
 
 return Player

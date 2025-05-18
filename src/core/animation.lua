@@ -35,8 +35,8 @@ function Animation:update(dt)
 end
 
 function Animation:setCoordinates(x, y)
-  self.x = x * BASE_SIZE
-  self.y = y * BASE_SIZE
+  self.x = x
+  self.y = y
 end
 
 function Animation:setAngle(angle)

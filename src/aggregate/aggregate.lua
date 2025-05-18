@@ -62,6 +62,7 @@ function Aggregate:remove(entity)
   for i, object in ipairs(self.objects) do
     if object.id == entity.id then
       table.remove(self.objects, i)
+      return
     end
   end
 end
