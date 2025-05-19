@@ -229,6 +229,14 @@ function Scene:new(map)
     self.waitTime = 1
   end)
 
+  self:addEvent(function()
+    WORLD.SCENE.dialogs:addDialog('david', 'Esse lugar... Eu ja vi antes, mas como? Isso esta dentro da minha mente ou e real? Adam!')
+  end)
+
+  self:addEvent(function()
+    WORLD.STORYMANAGER:advanceScene()
+  end)
+
   --Events init
   GAME.CUTSCENE = true
 

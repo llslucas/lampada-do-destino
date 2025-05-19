@@ -17,10 +17,10 @@ end
 
 function GenericScene:draw()
   self.map:draw()
-  self.dialogs:draw()
   if self.overlay and self.showOverlay then
     self.overlay:draw()
   end
+  self.dialogs:draw()
 end
 
 function GenericScene:update(dt)
