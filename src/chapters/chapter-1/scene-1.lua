@@ -27,22 +27,22 @@ function Scene:new()
   self.map.entities:add(player, manager)
 
   manager:addDialog('gerente',
-    'David, Adam te deixou responsavel pelos pertences dele, precisamos que voce va ate o armario e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui esta a autorizacao.')
-  manager:addDialog('david', '** Promovido? Transferido? Estranho, ele nao me disse nada sobre isso. **')
+    'David, Adam te deixou responsável pelos pertences dele, precisamos que você vá até o armário e recolha-os. Ele foi promovido e transferido para outra unidade. Aqui está a autorização.')
+  manager:addDialog('david', '** Promovido? Transferido? Estranho, ele não me disse nada sobre isso. **')
 
   armarioAdam = self.map.entities:getItemById('armario-adam')
 
   armarioAdam:setPostOpenCallback(
     function()
       self.dialogs:addDialog('david',
-        'Tem uma caixa aqui, ela contem os pertences do Adam, o que sera que ele deixou para tras?')
+        'Tem uma caixa aqui, ela contém os pertences do Adam, o que será que ele deixou para trás?')
       self.dialogs:addDialog('empty',
-        '** David retira a caixa do armario e a abre, encontrando uma lampada, uma foto e dois papeis. **')
+        '** David retira a caixa do armário e a abre, encontrando uma lâmpada, uma foto e dois papeis. **')
       self.dialogs:addDialog('david', 'Vamos ver o que temos aqui...')
       self.dialogs:addImage('lampada')
-      self.dialogs:addDialog('david', 'Uma lampada? Que esquisito...')
+      self.dialogs:addDialog('david', 'Uma lâmpada? Que esquisito...')
       self.dialogs:addImage('nisus')
-      self.dialogs:addDialog('david', 'Nisus? Ja ouvi falar desse navio, e da Celestia...')
+      self.dialogs:addDialog('david', 'Nisus? Já ouvi falar desse navio, é da Celestia...')
       self.dialogs:addDialog('david', 'Por fim temos dois papeis...')
       
       self:addEvent(function() WORLD.STORYMANAGER:advanceScene(self.map) end)

@@ -43,6 +43,9 @@ function Dialog:update(dt)
         local nextChar = text:sub(#self.currentText + 1, #self.currentText + 1)
 
         if nextChar ~= "" then
+          if nextChar and nextChar:byte() >= 0xC0 then
+            nextChar = text:sub(#self.currentText + 1, #self.currentText + 2)
+          end
           self:addCharacter(nextChar)
         else
           self.textFinished = true

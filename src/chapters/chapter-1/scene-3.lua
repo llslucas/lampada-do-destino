@@ -21,7 +21,7 @@ function Scene:new()
 
   self.map.entities:add(player)
 
-  self.dialogs:addDialog('david', 'O que... Onde estou? Posso sentir o chao, cheiro de sal... isso e real?')
+  self.dialogs:addDialog('david', 'O que... Onde estou? Posso sentir o chão, cheiro de sal... isso e real?')
 
   --Events init
 

@@ -65,9 +65,9 @@ function Scene:new(map)
   end)
 
   self:addEvent(function()
-    WORLD.SCENE.dialogs:addDialog('david', 'Este texto nao faz o menor sentido...')
+    WORLD.SCENE.dialogs:addDialog('david', 'Este texto não faz o menor sentido...')
     WORLD.SCENE.dialogs:addDialog('david',
-      'Sao textos completamente diferentes, mas ambos possuem palavras marcadas, porque sera?')
+      'São textos completamente diferentes, mas ambos possuem palavras marcadas, porque será?')
   end)
 
   --Palavra 1
@@ -87,7 +87,7 @@ function Scene:new(map)
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
     paper2:unhover()
-    WORLD.SCENE.dialogs:addDialog('david-susto', 'Os papeis estao relacionados!')
+    WORLD.SCENE.dialogs:addDialog('david-susto', 'Os papeis estão relacionados!')
   end)
 
   --Palavra 2
@@ -164,14 +164,14 @@ function Scene:new(map)
 
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david-susto',
-    'O Nisus... Os funcionarios... Adam esta em perigo? E ele quer que eu fuja? Nao!')
+    'O Nisus... Os funcionários... Adam esta em perigo? E ele quer que eu fuja? Não!')
     WORLD.SCENE.dialogs:addDialog('david', 'Preciso me acalmar...')
-    WORLD.SCENE.dialogs:addDialog('david', 'Parando para pensar, esta lampada me parece esquisita...')
+    WORLD.SCENE.dialogs:addDialog('david', 'Parando para pensar, esta lâmpada me parece esquisita...')
   end)
 
   self:addEvent(function()
     WORLD.SCENE.map.entities:remove(paper1)
-    WORLD.SCENE.dialogs:addDialog('empty', 'David examina a base da lampada e ela entao emite um brilho intenso.')
+    WORLD.SCENE.dialogs:addDialog('empty', 'David examina a base da lampada e ela então emite um brilho intenso.')
   end)
 
   self:addEvent(function()
@@ -230,7 +230,7 @@ function Scene:new(map)
   end)
 
   self:addEvent(function()
-    WORLD.SCENE.dialogs:addDialog('david', 'Esse lugar... Eu ja vi antes, mas como? Isso esta dentro da minha mente ou e real? Adam!')
+    WORLD.SCENE.dialogs:addDialog('david', 'Esse lugar... Eu ja vi antes, mas como? Isso esta dentro da minha mente ou é real? Adam!')
   end)
 
   self:addEvent(function()
@@ -274,7 +274,7 @@ function Scene:keypressed(key)
           paper2:select()
           self.waitingCorrectText = false
         else
-          self.dialogs:addDialog('david', 'Isso nao me parece certo...')
+          self.dialogs:addDialog('david', 'Isso não me parece certo...')
         end
       end
     end

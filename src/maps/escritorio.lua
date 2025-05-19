@@ -35,7 +35,7 @@ function Escritorio:new()
 
   door:setCollisionCallback(
     function()
-      WORLD.SCENE.dialogs:addDialog('david', 'Nao posso sair daqui ainda...')
+      WORLD.SCENE.dialogs:addDialog('david', 'Não posso sair daqui ainda...')
     end
   )
 
@@ -45,7 +45,7 @@ function Escritorio:new()
   local armarioDavid = Armario(17, 12, 'armario-david')
   armarioDavid:setPostOpenCallback(
     function()
-      WORLD.SCENE.dialogs:addDialog('david', 'Este e meu armario.')
+      WORLD.SCENE.dialogs:addDialog('david', 'Este é meu armário.')
     end
   )
 
