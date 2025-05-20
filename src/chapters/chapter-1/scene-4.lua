@@ -1,10 +1,9 @@
 -- Capítulo 1 - Prólogo
--- Cena 3 - Nisus
-
+-- Cena 4 - Dentro do alçapão
 local GenericScene = require 'src.core.generic-scene'
 local Scene = GenericScene:extend()
 
-local Mapa = require 'src.maps.corredor-nisus'
+local Mapa = require 'src.maps.alcapao'
 local Player = require 'src.characters.player'
 
 local player
@@ -16,12 +15,10 @@ function Scene:new()
   self.map = Mapa()
 
   player = Player()
-  player:setCoordinates(0, 15)
-  player:turn('right')
+  player:setCoordinates(13, 7)
+  player:turn('down')
 
   self.map.entities:add(player)
-
-  self.dialogs:addDialog('david', 'O que... Onde estou? Posso sentir o chão, cheiro de sal... isso e real?')
 
   --Events init
 

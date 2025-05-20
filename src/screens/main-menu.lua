@@ -36,7 +36,7 @@ function MainMenu:keypressed(key)
   if key == 'space' then
     GAME.STATE = 'running'
     self.theme:stop()
-    WORLD.STORYMANAGER = StoryManager(1,3)
+    WORLD.STORYMANAGER = StoryManager(1,4)
   end
 end
 
