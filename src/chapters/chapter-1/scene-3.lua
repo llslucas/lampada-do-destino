@@ -16,7 +16,7 @@ function Scene:new()
   self.map = Mapa()
 
   player = Player()
-  player:setCoordinates(0, 10)
+  player:setCoordinates(0, 15)
   player:turn('right')
 
   self.map.entities:add(player)
