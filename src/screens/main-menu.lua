@@ -2,11 +2,14 @@ local Screen = require 'src.core.screen'
 local MainMenu = Screen:extend()
 
 local StoryManager = require 'src.chapters.storymanager'
+local MainTheme = require 'src.sounds.main-theme'
 
 function MainMenu:new()
   MainMenu.super.new(self, 'assets/img/screens/main.png')
   self.showText = true
   self.elapsedTime = 0
+  self.theme = MainTheme()
+  self.theme:play()
 end
 
 function MainMenu:draw()
@@ -31,8 +34,9 @@ end
 
 function MainMenu:keypressed(key)
   if key == 'space' then
-    WORLD.STORYMANAGER = StoryManager()
     GAME.STATE = 'running'
+    self.theme:stop()
+    WORLD.STORYMANAGER = StoryManager(1,3)
   end
 end
 
