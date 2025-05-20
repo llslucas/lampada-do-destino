@@ -34,6 +34,8 @@ function Scene:new(map)
     armarioAdam:interact()
   end
 
+  -- Definição do papel 1, com a mensagem amigável de adam
+
   paper1 = Paper('papel-mensagem-1')
   paper1:setCoordinates(2, 2)
 
@@ -41,6 +43,8 @@ function Scene:new(map)
   paper1:addText(InteractiveText('*dar um passeio no navio.', 102, 262))
   paper1:addText(InteractiveText('*cordiais e dispostos,\ntambém passeiam no Nisus.', 102, 310))
   paper1:addText(InteractiveText('*Obrigado por tudo.', 102, 397))
+
+  -- Definição do papel 2, com a mensagem auxiliar
 
   paper2 = Paper('papel-mensagem-2')
   paper2:setCoordinates(11, 2)
@@ -50,6 +54,8 @@ function Scene:new(map)
   paper2:addText(InteractiveText('*não confie neles.', 391, 339))
   paper2:addText(InteractiveText('*POR FAVOR FUJA', 391, 408))
 
+  -- Mostra papel 1
+
   self:addEvent(function()
     self.map.entities:add(paper1)
     WORLD.SCENE.watingInput = true
@@ -58,6 +64,8 @@ function Scene:new(map)
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david', 'Uma mensagem do Adam...')
   end)
+
+  -- Mostra papel 2
 
   self:addEvent(function()
     self.map.entities:add(paper2)
@@ -70,7 +78,9 @@ function Scene:new(map)
       'São textos completamente diferentes, mas ambos possuem palavras marcadas, porque será?')
   end)
 
-  --Palavra 1
+  --Escolha da primeira palavra
+
+  --Papel 1
 
   self:addEvent(function()
     WORLD.SCENE.state = 'paper1'
@@ -78,11 +88,15 @@ function Scene:new(map)
     WORLD.SCENE.waitingCorrectText = true
   end)
 
+  --Papel 2
+
   self:addEvent(function()
     WORLD.SCENE.state = 'paper2'
     paper2:hoverNextText()
     WORLD.SCENE.waitingCorrectText = true
   end)
+
+  -- Substituição do texto e descoberta de que os papeis estão relacionados
 
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
@@ -90,7 +104,9 @@ function Scene:new(map)
     WORLD.SCENE.dialogs:addDialog('david-susto', 'Os papeis estão relacionados!')
   end)
 
-  --Palavra 2
+  --Escolha da segunda palavra
+
+  --Papel 1
 
   self:addEvent(function()
     WORLD.SCENE.state = 'paper1'
@@ -98,18 +114,24 @@ function Scene:new(map)
     WORLD.SCENE.waitingCorrectText = true
   end)
 
+  --Papel 2
+
   self:addEvent(function()
     WORLD.SCENE.state = 'paper2'
     paper2:hoverNextText()
     WORLD.SCENE.waitingCorrectText = true
   end)
+
+  -- Substituição do texto
 
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
     paper2:unhover()
   end)
 
-  --Palavra 3
+  --Escolha da terceira palavra
+
+  --Papel 1
 
   self:addEvent(function()
     WORLD.SCENE.state = 'paper1'
@@ -117,18 +139,24 @@ function Scene:new(map)
     WORLD.SCENE.waitingCorrectText = true
   end)
 
+  --Papel 2
+
   self:addEvent(function()
     WORLD.SCENE.state = 'paper2'
     paper2:hoverNextText()
     WORLD.SCENE.waitingCorrectText = true
   end)
+
+  -- Substituição do texto
 
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
     paper2:unhover()
   end)
 
-  --Palavra 4
+  --Escolha da quarta palavra
+
+  --Papel 1
 
   self:addEvent(function()
     WORLD.SCENE.state = 'paper1'
@@ -136,11 +164,15 @@ function Scene:new(map)
     WORLD.SCENE.waitingCorrectText = true
   end)
 
+  --Papel 2
+
   self:addEvent(function()
     WORLD.SCENE.state = 'paper2'
     paper2:hoverNextText()
     WORLD.SCENE.waitingCorrectText = true
   end)
+
+  -- Substituição da mensagem
 
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
@@ -148,10 +180,14 @@ function Scene:new(map)
     paper2:unhover()
   end)
 
+  -- Descoberta da mensagem secreta
+
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david-susto', 'Uma mensagem secreta!')
     self.waitingInput = true
   end)
+
+  -- A mensagem é movida ao centro da tela
 
   self:addEvent(function()
     WORLD.SCENE.map.entities:remove(paper2)
@@ -162,6 +198,8 @@ function Scene:new(map)
     self.waitTime = 5
   end)
 
+  -- Monólogo de david
+
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david-susto',
     'O Nisus... Os funcionários... Adam esta em perigo? E ele quer que eu fuja? Não!')
@@ -169,10 +207,14 @@ function Scene:new(map)
     WORLD.SCENE.dialogs:addDialog('david', 'Parando para pensar, esta lâmpada me parece esquisita...')
   end)
 
+  -- Interação com a lâmpada
+
   self:addEvent(function()
     WORLD.SCENE.map.entities:remove(paper1)
     WORLD.SCENE.dialogs:addDialog('empty', 'David examina a base da lampada e ela então emite um brilho intenso.')
   end)
+
+  -- Viagem ao Nisus
 
   self:addEvent(function()
     player:playAnimation(1)
