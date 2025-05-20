@@ -1,6 +1,6 @@
 local Buttons = Object:extend()
 
-local Button = require 'src.entity.graphics.button'
+local Button = require 'src.graphics.button'
 
 function Buttons:new(initialX, initialY)
   self.buttons = {}
