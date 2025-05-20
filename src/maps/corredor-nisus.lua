@@ -10,11 +10,11 @@ function Escritorio:new()
   Escritorio.super.new(self, 'corredor-nisus')
 
   -- Border invisible Walls
-  self.entities:add(InvisibleWall(0,9, 17,1)) --top wall
+  self.entities:add(InvisibleWall(0,8, 17,1)) --top wall
   self.entities:add(InvisibleWall(0,12, 20,1)) -- bottom wall
 
   -- Door 
-  local door = Door(17,9, 3, 1)
+  local door = Door(17,8, 3, 1)
   self.entities:add(door)
 
   door:setCollisionCallback(
