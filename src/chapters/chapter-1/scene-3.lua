@@ -14,6 +14,7 @@ function Scene:new()
   Scene.super.new(self)
 
   self.map = Mapa()
+  self.showSanityBar = true
 
   player = Player()
   player:setCoordinates(0, 15)

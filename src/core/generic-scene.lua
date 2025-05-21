@@ -1,10 +1,13 @@
 -- Capítulo 1 - Abertura do jogo
 local GenericScene = Object:extend()
 local Dialogs = require 'src.aggregate.dialogs'
+local SanityBar = require 'src.graphics.sanity-bar'
 
 function GenericScene:new()
   self.map = nil
   self.dialogs = Dialogs()
+  self.sanityBar = SanityBar()
+  self.showSanityBar = false
   self.time = 0
   self.events = {}
   self.coroutine = nil
@@ -17,9 +20,15 @@ end
 
 function GenericScene:draw()
   self.map:draw()
+
+  if self.showSanityBar then
+    self.sanityBar:draw()
+  end
+
   if self.overlay and self.showOverlay then
     self.overlay:draw()
-  end
+  end 
+
   self.dialogs:draw()
 end
 

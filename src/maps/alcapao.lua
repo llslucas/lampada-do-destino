@@ -16,7 +16,6 @@ function Alcapao:new()
 
   self.entities:add(InvisibleWall(6, 7, 5, 1)) -- cage
 
-
   local door = Door(4, 7, 2, 1)
   door:setCollisionCallback(function()
     WORLD.SCENE.dialogs:addDialog('david-susto', 'ADAM!!!')
