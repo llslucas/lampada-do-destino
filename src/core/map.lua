@@ -12,16 +12,19 @@ function Map:new(mapName, marginUp, marginBottom, marginLeft, marginRight)
   self.marginRight = marginRight and marginRight * BASE_SIZE or 0
 
   self.entities = Aggregate()
+  self.enemies = Aggregate()
 end
 
 function Map:draw()
   LG.draw(self.bg.img, 0, 0, 0, IMAGE_SCALING, IMAGE_SCALING)
   self.entities:draw()
+  self.enemies:draw()
 end
 
 function Map:update(dt)
   if GAME.STATE == 'running' then
     self.entities:update(dt)
+    self.enemies:update(dt)
   end
 end
 

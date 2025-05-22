@@ -9,6 +9,7 @@ function Player:new()
   self.animations = { DavidLampada() }
   self.showAnimation = false
   self.currentAnimation = 1
+  self.sanity = 100
 end
 
 function Player:draw()
@@ -39,6 +40,13 @@ function Player:update(dt)
     elseif love.keyboard.isDown('right') then
       self:walkRight()
     end
+  end
+
+  -- Enemy collision check 
+  if self:checkEnemyCollision() then
+    print("Colisão com inimigo detectada")
+
+    self.sanity = self.sanity - 1
   end
 end
 
@@ -71,6 +79,12 @@ function Player:checkGlobalCollision(destinationX, destinationY)
   end
 
   return self:checkFutureBorderCollision(destinationX, destinationY)
+end
+
+function Player:checkEnemyCollision()
+  for _, enemy in WORLD.SCENE.map.enemies:getItens() do
+    return enemy:checkCollision(self)
+  end
 end
 
 function Player:playAnimation(animation)

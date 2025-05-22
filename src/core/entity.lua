@@ -29,7 +29,8 @@ end
 
 function Entity:drawDebugInfo()
   LG.setColor(1, 0, 0, 0.4)
-  LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
+  -- LG.rectangle('fill', self.x, self.y, self:getWidth(), self:getHeight())
+  LG.polygon("fill", self:getComplexHitbox())
   LG.setColor(1, 1, 1)
 end
 
@@ -73,10 +74,21 @@ end
 
 function Entity:getHitbox()
   return
-    self.x,
-    self.y,
-    self:getWidth(),
-    self:getHeight()
+      self.x,
+      self.y,
+      self:getWidth(),
+      self:getHeight()
+end
+
+function Entity:getComplexHitbox()
+  local x, y = self.x, self.y
+  local w, h = self:getWidth(), self:getHeight()
+  local x1, y1 = x, y
+  local x2, y2 = x + w, y
+  local x3, y3 = x + w, y + h
+  local x4, y4 = x, y + h
+  
+  return { x1, y1, x2, y2, x3, y3, x4, y4 }
 end
 
 function Entity:checkCollision(object)
@@ -84,10 +96,10 @@ function Entity:checkCollision(object)
   local x2, y2, w2, h2 = object:getHitbox()
 
   local collision =
-    x1 <= x2 + w2 and
-    x1 + w1 >= x2 and
-    y1 <= y2 + h2 and
-    y1 + h1 >= y2
+      x1 <= x2 + w2 and
+      x1 + w1 >= x2 and
+      y1 <= y2 + h2 and
+      y1 + h1 >= y2
 
   local side = nil
   if collision then

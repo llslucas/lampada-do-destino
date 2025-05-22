@@ -3,7 +3,7 @@ local SanityBar = Entity:extend()
 
 function SanityBar:new()
   local image = LG.newImage('assets/img/graphics/sanity-bar.png')
-  SanityBar.super.new(self, image)
+  SanityBar.super.new(self, image, IMAGE_SCALING)
   self:setCoordinates(1,1)
   self.sanity = 100
   self.imgNormal = LG.newImage('assets/img/characters/david-mini/david-normal.png')
