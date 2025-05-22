@@ -47,15 +47,24 @@ function Escritorio:new()
   quadroAvisos:setCoordinates(9, 2)
 
   quadroAvisos:setInteractionCallBack(function(self)
-    WORLD.SCENE.dialogs:addDialog('david', "Há recortes de notícias de jornal aqui...")
+    WORLD.SCENE.dialogs:addDialog('david', 'Há recortes de notícias de jornal aqui...')
 
     WORLD.SCENE.dialogs:addDialog('empty',
-      "Os funcionários sumiram sem deixar rastros, o gerente afirma que pediram demissão e saíram do país.")
+      '"Os funcionários sumiram sem deixar rastros, o gerente afirma que pediram demissão e saíram do país."')
     WORLD.SCENE.dialogs:addDialog('empty',
-      "Celestia sai na frente na corrida e lança o primeiro comprimido indutor de comportamento do mercado. Ainda não se sabe como estão realizando seus testes.")
-    WORLD.SCENE.dialogs:addDialog('empty', "O último desaparecimento é do escriturário geral, David.")
+      '"Celestia sai na frente na corrida e lança o primeiro comprimido indutor de comportamento do mercado. Ainda não se sabe como estão realizando seus testes."')
+    WORLD.SCENE.dialogs:addDialog('empty', '"O último desaparecimento é do escriturário geral, David."')
 
-    WORLD.SCENE.dialogs:addDialog('david-susto', "...")
+    WORLD.SCENE.dialogs:addDialog('david-susto', '...')
+
+    door:setCollisionCallback(
+      function(self)
+        WORLD.SCENE.dialogs:addDialog('empty', 'David...')
+        WORLD.SCENE.dialogs:addDialog('david-susto', 'Adam?!?!')
+
+        self:setCollisionCallback(function() WORLD.STORYMANAGER:advanceScene() end)
+      end
+    )
 
     self:setInteractionCallBack(function() return end)
   end)
@@ -67,21 +76,12 @@ function Escritorio:new()
   camera1:setAbsoluteCoordinates(256, 400)
 
   local camera2 = Camera(90, 30)
-  camera2:setAbsoluteCoordinates(640, 525)
+  camera2:setAbsoluteCoordinates(615, 525)
 
   local camera3 = Camera()
   camera3:setAbsoluteCoordinates(417, 50)
 
-  self.enemies:add(camera1, camera2, camera3)
-
-  door:setCollisionCallback(
-    function(self)
-      WORLD.SCENE.dialogs:addDialog('empty', 'DAVID!')
-      WORLD.SCENE.dialogs:addDialog('david-susto', 'Adam?!?!')
-
-      self:setCollisionCallback(function() WORLD.STORYMANAGER:advanceScene() end)
-    end
-  )
+  self.enemies:add(camera1, camera2, camera3)  
 end
 
 return Escritorio
