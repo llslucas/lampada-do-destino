@@ -12,8 +12,9 @@ require 'src.global.world'
 -- Dependências locais
 local DebugInfo = require 'src.graphics.debug-info'
 local MainMenu = require 'src.screens.main-menu'
+local GameOver = require 'src.screens.game-over'
 
-local menu
+local menu, gameOver
 
 function love.load()
   math.randomseed(os.time())
@@ -21,6 +22,7 @@ function love.load()
   LG.setBackgroundColor(1,1,1)
 
   menu = MainMenu()
+  gameOver = GameOver()
 end
 
 function love.draw()
@@ -28,9 +30,14 @@ function love.draw()
     menu:draw()
   end
 
-  if WORLD.SCENE then
+  if WORLD.SCENE and GAME.STATE ~= 'gameover' then
     WORLD.SCENE:draw()
   end
+
+  if GAME.STATE == 'gameover' then
+    gameOver:draw()
+  end
+
   DebugInfo:draw()
 end
 
@@ -39,8 +46,12 @@ function love.update(dt)
     menu:update(dt)
   end
 
-  if WORLD.SCENE then
+  if WORLD.SCENE and GAME.STATE ~= 'gameover' then
     WORLD.SCENE:update(dt)
+  end
+
+  if GAME.STATE == 'gameover' then
+    gameOver:update(dt)
   end
 end
 
@@ -49,10 +60,14 @@ function love.keypressed(key)
     menu:keypressed(key)
   end
 
+  if GAME.STATE == 'gameover' then
+    gameOver:keypressed(key)
+  end
+
   if key == 'f9' then
     DEBUG_MODE = not DEBUG_MODE
   else
-    if WORLD.SCENE then
+    if WORLD.SCENE and GAME.STATE ~= 'gameover' then
       WORLD.SCENE:keypressed(key)
     end
   end

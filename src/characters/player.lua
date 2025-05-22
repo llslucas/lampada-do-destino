@@ -45,8 +45,11 @@ function Player:update(dt)
   -- Enemy collision check 
   if self:checkEnemyCollision() then
     print("Colisão com inimigo detectada")
-
     self.sanity = self.sanity - 1
+
+    if self.sanity <= 0 then
+      GAME.STATE = 'gameover'
+    end
   end
 end
 
@@ -83,8 +86,11 @@ end
 
 function Player:checkEnemyCollision()
   for _, enemy in WORLD.SCENE.map.enemies:getItens() do
-    return enemy:checkCollision(self)
+    if enemy:checkCollision(self) then 
+      return true
+    end
   end
+  return false
 end
 
 function Player:playAnimation(animation)

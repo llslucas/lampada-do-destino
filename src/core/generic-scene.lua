@@ -27,7 +27,7 @@ function GenericScene:draw()
 
   if self.overlay and self.showOverlay then
     self.overlay:draw()
-  end 
+  end
 
   self.dialogs:draw()
 end
@@ -78,5 +78,9 @@ function GenericScene:resumeCoroutine()
   end
 end
 
+function GenericScene:initSanityBar(player)
+  self.sanityBar:setPlayer(player)
+  self.showSanityBar = true
+end
 
 return GenericScene

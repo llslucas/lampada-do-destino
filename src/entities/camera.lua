@@ -76,7 +76,21 @@ function Camera:getHitbox()
 end
 
 function Camera:checkCollision(object)
-  return
+  local points = self:getHitbox()
+  local px, py = object:getCenterCoordinates()
+
+  local inside = false
+  local j = #points - 1
+  for i = 1, #points, 2 do
+    local xi, yi = points[i], points[i+1]
+    local xj, yj = points[j], points[j+1]
+    if ((yi > py) ~= (yj > py)) and
+        (px < (xj - xi) * (py - yi) / (yj - yi + 1e-12) + xi) then
+      inside = not inside
+    end
+    j = i
+  end
+  return inside
 end
 
 return Camera

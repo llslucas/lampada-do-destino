@@ -20,6 +20,8 @@ function Escritorio:new()
   self.entities:add(InvisibleWall(0, 13, 15, 1)) -- bottom top wall 1
   self.entities:add(InvisibleWall(18, 13, 2, 1)) -- bottom top wall 2
 
+  self.entities:add(InvisibleWall(19, 14, 1, 4)) -- bottom right wall
+
   self.entities:add(InvisibleWall(0, 18, 20, 1)) -- bottom wall
 
   -- Door
@@ -81,7 +83,7 @@ function Escritorio:new()
   local camera3 = Camera()
   camera3:setAbsoluteCoordinates(417, 50)
 
-  self.enemies:add(camera1, camera2, camera3)  
+  self.enemies:add(camera1, camera2, camera3)
 end
 
 return Escritorio
