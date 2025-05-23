@@ -30,8 +30,7 @@ function Scene:new()
   local door = self.map.entities:getItemById('door')
 
   quadroAvisos:setInteractionCallBack(function(self)
-
-    WORLD.SCENE:addEvent(function () 
+    WORLD.SCENE:addEvent(function ()
       WORLD.SCENE.dialogs:addDialog('david', 'Há recortes de notícias de jornal aqui...')
       WORLD.SCENE.dialogs:addDialog('empty', '"Os funcionários sumiram sem deixar rastros, o gerente afirma que pediram demissão e saíram do país."')
       WORLD.SCENE.dialogs:addDialog('empty', '"Celestia sai na frente na corrida e lança o primeiro comprimido indutor de comportamento do mercado. Ainda não se sabe como estão realizando seus testes."')
@@ -40,20 +39,22 @@ function Scene:new()
       WORLD.SCENE.dialogs:addDialog('david-susto', '...')
     end)
 
-    WORLD.SCENE:addEvent(function() 
-      player.sanity = player.sanity - 10
-    end)    
+    WORLD.SCENE:addEvent(function()
+      player:setDamage(20)
 
-    door:setCollisionCallback(
-      function(self)
-        WORLD.SCENE.dialogs:addDialog('empty', 'David...')
-        WORLD.SCENE.dialogs:addDialog('david-susto', 'Adam?!?!')
+      door:setCollisionCallback(
+        function(self)
+          WORLD.SCENE.dialogs:addDialog('empty', 'David...')
+          WORLD.SCENE.dialogs:addDialog('david-susto', 'Adam?!?!')
 
-        self:setCollisionCallback(function() WORLD.STORYMANAGER:advanceScene() end)
-      end
-    )
+          self:setCollisionCallback(function() WORLD.STORYMANAGER:advanceScene() end)
+        end
+      )
 
-    self:setInteractionCallBack(function() return end)
+      self:setInteractionCallBack(function() return end)
+    end)
+    
+    WORLD.SCENE:makeCoroutine()
   end)
 
   GAME.CUTSCENE = false
