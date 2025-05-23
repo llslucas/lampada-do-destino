@@ -2,6 +2,7 @@ local Character = require 'src.characters.character'
 local Player = Character:extend()
 
 local DavidLampada = require 'src.animations.david-lampada'
+local DamageSound = require 'src.sounds.damage-sound'
 
 function Player:new()
   Player.super.new(self, LG.newImage("assets/img/characters/david-sprite.png"), IMAGE_SCALING)
@@ -10,6 +11,7 @@ function Player:new()
   self.showAnimation = false
   self.currentAnimation = 1
   self.sanity = 100
+  self.damageSound = DamageSound()
 end
 
 function Player:draw()
@@ -44,8 +46,7 @@ function Player:update(dt)
 
   -- Enemy collision check 
   if self:checkEnemyCollision() then
-    print("Colisão com inimigo detectada")
-    self.sanity = self.sanity - 1
+    self:setDamage(1)
 
     if self.sanity <= 0 then
       GAME.STATE = 'gameover'
@@ -101,6 +102,11 @@ end
 
 function Player:stopAnimation()
   self.showAnimation = false
+end
+
+function Player:setDamage(damage)
+  self.sanity = self.sanity - damage
+  self.damageSound:play()
 end
 
 return Player

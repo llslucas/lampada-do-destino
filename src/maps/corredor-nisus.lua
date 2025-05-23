@@ -50,30 +50,6 @@ function Escritorio:new()
   --Quadro de avisos
   local quadroAvisos = MapObject('quadro-avisos')
   quadroAvisos:setCoordinates(9, 2)
-
-  quadroAvisos:setInteractionCallBack(function(self)
-    WORLD.SCENE.dialogs:addDialog('david', 'Há recortes de notícias de jornal aqui...')
-
-    WORLD.SCENE.dialogs:addDialog('empty',
-      '"Os funcionários sumiram sem deixar rastros, o gerente afirma que pediram demissão e saíram do país."')
-    WORLD.SCENE.dialogs:addDialog('empty',
-      '"Celestia sai na frente na corrida e lança o primeiro comprimido indutor de comportamento do mercado. Ainda não se sabe como estão realizando seus testes."')
-    WORLD.SCENE.dialogs:addDialog('empty', '"O último desaparecimento é do escriturário geral, David."')
-
-    WORLD.SCENE.dialogs:addDialog('david-susto', '...')
-
-    door:setCollisionCallback(
-      function(self)
-        WORLD.SCENE.dialogs:addDialog('empty', 'David...')
-        WORLD.SCENE.dialogs:addDialog('david-susto', 'Adam?!?!')
-
-        self:setCollisionCallback(function() WORLD.STORYMANAGER:advanceScene() end)
-      end
-    )
-
-    self:setInteractionCallBack(function() return end)
-  end)
-
   self.entities:add(quadroAvisos)
 
   -- Cameras
