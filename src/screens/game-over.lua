@@ -1,7 +1,6 @@
 local Screen = require 'src.core.screen'
 local MainMenu = Screen:extend()
 
-local StoryManager = require 'src.chapters.storymanager'
 local MainTheme = require 'src.sounds.main-theme'
 
 function MainMenu:new()
@@ -9,11 +8,12 @@ function MainMenu:new()
   self.showText = true
   self.elapsedTime = 0
   self.theme = MainTheme()
-  self.theme:play()
 end
 
 function MainMenu:draw()
   MainMenu.super.draw(self)
+  self.theme:play()
+
   if self.showText then
     LG.setFont(FONTS.MENU)
     LG.print("PRESSIONE ESPAÇO PARA CONTINUAR", 100, 580)

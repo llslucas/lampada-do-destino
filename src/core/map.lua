@@ -13,6 +13,8 @@ function Map:new(mapName, marginUp, marginBottom, marginLeft, marginRight)
 
   self.entities = Aggregate()
   self.enemies = Aggregate()
+
+  self.theme = nil
 end
 
 function Map:draw()
@@ -23,8 +25,11 @@ end
 
 function Map:update(dt)
   if GAME.STATE == 'running' then
+    self.theme:play()
     self.entities:update(dt)
     self.enemies:update(dt)
+  elseif GAME.STATE == 'gameover' then
+    self.theme:stop()
   end
 end
 
@@ -38,6 +43,10 @@ function Map:keyreleased(key)
   if GAME.STATE == 'running' then
     self.entities:keyreleased(key)
   end
+end
+
+function Map:setTheme(theme)
+  self.theme = theme
 end
 
 return Map

@@ -4,9 +4,11 @@ local Alcapao = Map:extend()
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local MapObject = require 'src.entities.map-object'
+local BgmDark = require 'src.sounds.bgm-dark'
 
 function Alcapao:new()
   Alcapao.super.new(self, 'alcapao')
+  self:setTheme(BgmDark())
 
   -- Border invisible Walls
   self.entities:add(InvisibleWall(12, 8, 4, 1)) -- top wall

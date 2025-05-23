@@ -6,9 +6,12 @@ local Door = require 'src.entities.door'
 local MesaNavio = require 'src.entities.mesa-navio'
 local Camera = require 'src.entities.camera'
 local MapObject = require 'src.entities.map-object'
+local BgmDark = require 'src.sounds.bgm-dark'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'corredor-nisus')
+
+  self:setTheme(BgmDark())
 
   -- Border invisible Walls
   self.entities:add(InvisibleWall(8, 2, 10, 1))  --top wall

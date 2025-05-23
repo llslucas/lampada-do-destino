@@ -14,9 +14,18 @@ local DebugInfo = require 'src.graphics.debug-info'
 local MainMenu = require 'src.screens.main-menu'
 local GameOver = require 'src.screens.game-over'
 
+local canvas, scale, offsetX, offsetY
 local menu, gameOver
 
 function love.load()
+  -- love.window.setMode(0, 0, {fullscreen = true})
+
+  local screenWidth, screenHeight = LG.getDimensions()
+  canvas = LG.newCanvas(640, 640)
+  scale = math.min(screenWidth / 640, screenHeight / 640)
+  offsetX = (screenWidth - 640 * scale) / 2
+  offsetY = (screenHeight - 640 * scale) / 2
+
   math.randomseed(os.time())
   LG.setFont(FONTS.NORMAL)
   LG.setBackgroundColor(1,1,1)
@@ -26,11 +35,14 @@ function love.load()
 end
 
 function love.draw()
+  LG.setCanvas(canvas)
+  LG.clear()
+
   if not WORLD.STORYMANAGER then
     menu:draw()
   end
 
-  if WORLD.SCENE and GAME.STATE ~= 'gameover' then
+  if WORLD.SCENE then
     WORLD.SCENE:draw()
   end
 
@@ -39,6 +51,14 @@ function love.draw()
   end
 
   DebugInfo:draw()
+
+  LG.setCanvas()
+
+  LG.setColor(0, 0, 0)
+  LG.rectangle("fill", 0, 0, LG.getWidth(), LG.getHeight())
+
+  LG.setColor(1, 1, 1)
+  LG.draw(canvas, offsetX, offsetY, 0, scale, scale)
 end
 
 function love.update(dt)
@@ -46,7 +66,7 @@ function love.update(dt)
     menu:update(dt)
   end
 
-  if WORLD.SCENE and GAME.STATE ~= 'gameover' then
+  if WORLD.SCENE then
     WORLD.SCENE:update(dt)
   end
 
@@ -67,7 +87,7 @@ function love.keypressed(key)
   if key == 'f9' then
     DEBUG_MODE = not DEBUG_MODE
   else
-    if WORLD.SCENE and GAME.STATE ~= 'gameover' then
+    if WORLD.SCENE then
       WORLD.SCENE:keypressed(key)
     end
   end

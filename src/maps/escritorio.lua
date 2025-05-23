@@ -4,9 +4,12 @@ local Escritorio = Map:extend()
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local Armario = require 'src.entities.armario'
+local BgmLight = require 'src.sounds.bgm-light'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'escritorio')
+
+  self:setTheme(BgmLight())
 
   -- Border invisible Walls
   self.entities:add(InvisibleWall(2, 2, 17, 1)) --top wall

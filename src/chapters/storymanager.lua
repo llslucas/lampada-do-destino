@@ -28,12 +28,14 @@ end
 function StoryManager:advanceScene(...)
   self.currentScene = self.currentScene + 1
   local Scene = self:getCurrentScene()
+  WORLD.SCENE.map.theme:stop()
   WORLD.SCENE = Scene(...)
 end
 
 function StoryManager:advanceChapter()
   self.currentChapter = self.currentChapter + 1
   local Scene = self:getCurrentScene()
+  WORLD.SCENE.map.theme:stop()
   WORLD.SCENE = Scene()
 end
 

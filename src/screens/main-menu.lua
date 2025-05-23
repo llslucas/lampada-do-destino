@@ -9,11 +9,12 @@ function MainMenu:new()
   self.showText = true
   self.elapsedTime = 0
   self.theme = MainTheme()
-  self.theme:play()
 end
 
 function MainMenu:draw()
   MainMenu.super.draw(self)
+  self.theme:play()
+
   if self.showText then
     LG.setFont(FONTS.MENU)
     LG.print("PRESSIONE ESPAÇO PARA INICIAR", 120, 580)
