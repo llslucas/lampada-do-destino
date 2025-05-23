@@ -1,6 +1,8 @@
 local MapObject = require 'src.entities.map-object'
 local Armario = MapObject:extend()
 
+local ArmarioSound = require 'src.sounds.fx.armario-sound'
+
 function Armario:new(x, y, id)
   Armario.super.new(self, nil)
 
@@ -9,12 +11,14 @@ function Armario:new(x, y, id)
   self.imgAberto = LG.newImage('assets/img/objects/armario-aberto.png')
   self.img = self.imgFechado
   self.status = 'fechado'
+  self.sound = ArmarioSound()
 
   self:setCoordinates(x, y)
 end
 
 function Armario:interact()
   if self.status == 'fechado' then
+    self.sound:play()
     self.img = self.imgAberto
     self.status = 'aberto'
   elseif self.status == 'aberto' then

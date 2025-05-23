@@ -4,7 +4,7 @@ local Escritorio = Map:extend()
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local Armario = require 'src.entities.armario'
-local BgmLight = require 'src.sounds.bgm-light'
+local BgmLight = require 'src.sounds.bgm.bgm-light'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'escritorio')

@@ -4,7 +4,7 @@ local Alcapao = Map:extend()
 local InvisibleWall = require 'src.entities.invisible-wall'
 local Door = require 'src.entities.door'
 local MapObject = require 'src.entities.map-object'
-local BgmDark = require 'src.sounds.bgm-dark'
+local BgmDark = require 'src.sounds.bgm.bgm-dark'
 
 function Alcapao:new()
   Alcapao.super.new(self, 'alcapao')

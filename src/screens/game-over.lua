@@ -1,7 +1,7 @@
 local Screen = require 'src.core.screen'
 local MainMenu = Screen:extend()
 
-local MainTheme = require 'src.sounds.main-theme'
+local MainTheme = require 'src.sounds.bgm.main-theme'
 
 function MainMenu:new()
   MainMenu.super.new(self, 'assets/img/screens/game-over.png')

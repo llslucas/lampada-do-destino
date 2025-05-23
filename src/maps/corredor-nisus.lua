@@ -6,7 +6,7 @@ local Door = require 'src.entities.door'
 local MesaNavio = require 'src.entities.mesa-navio'
 local Camera = require 'src.entities.camera'
 local MapObject = require 'src.entities.map-object'
-local BgmDark = require 'src.sounds.bgm-dark'
+local BgmDark = require 'src.sounds.bgm.bgm-dark'
 
 function Escritorio:new()
   Escritorio.super.new(self, 'corredor-nisus')

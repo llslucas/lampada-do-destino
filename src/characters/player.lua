@@ -2,7 +2,7 @@ local Character = require 'src.characters.character'
 local Player = Character:extend()
 
 local DavidLampada = require 'src.animations.david-lampada'
-local DamageSound = require 'src.sounds.damage-sound'
+local DamageSound = require 'src.sounds.fx.damage-sound'
 
 function Player:new()
   Player.super.new(self, LG.newImage("assets/img/characters/david-sprite.png"), IMAGE_SCALING)
