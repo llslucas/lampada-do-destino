@@ -13,9 +13,10 @@ require 'src.global.world'
 local DebugInfo = require 'src.graphics.debug-info'
 local MainMenu = require 'src.screens.main-menu'
 local GameOver = require 'src.screens.game-over'
+local MainTheme = require 'src.sounds.bgm.main-theme'
 
 local canvas, scale, offsetX, offsetY
-local menu, gameOver
+local menu, gameOver, mainTheme
 
 function love.load()
   -- love.window.setMode(0, 0, {fullscreen = true})
@@ -32,6 +33,7 @@ function love.load()
 
   menu = MainMenu()
   gameOver = GameOver()
+  mainTheme = MainTheme()
 end
 
 function love.draw()
@@ -40,14 +42,17 @@ function love.draw()
 
   if not WORLD.STORYMANAGER then
     menu:draw()
+    mainTheme:play()
   end
 
   if WORLD.SCENE then
+    mainTheme:stop()
     WORLD.SCENE:draw()
   end
 
   if GAME.STATE == 'gameover' then
     gameOver:draw()
+    mainTheme:play()
   end
 
   DebugInfo:draw()
