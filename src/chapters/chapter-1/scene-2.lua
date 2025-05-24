@@ -75,7 +75,7 @@ function Scene:new(map)
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david', 'Este texto não faz o menor sentido...')
     WORLD.SCENE.dialogs:addDialog('david',
-      'São textos completamente diferentes, mas ambos possuem palavras marcadas, porque será?')
+      'São textos completamente diferentes, mas ambos possuem palavras marcadas, por que será?')
   end)
 
   --Escolha da primeira palavra
@@ -101,7 +101,7 @@ function Scene:new(map)
   self:addEvent(function()
     paper1:replaceSelectedText(paper2:getSelectedText())
     paper2:unhover()
-    WORLD.SCENE.dialogs:addDialog('david-susto', 'Os papeis estão relacionados!')
+    WORLD.SCENE.dialogs:addDialog('david-susto', 'Os papéis estão relacionados!')
   end)
 
   --Escolha da segunda palavra
@@ -202,7 +202,7 @@ function Scene:new(map)
 
   self:addEvent(function()
     WORLD.SCENE.dialogs:addDialog('david-susto',
-    'O Nisus... Os funcionários... Adam esta em perigo? E ele quer que eu fuja? Não!')
+    'O Nisus... Os funcionários... Adam está em perigo? E ele quer que eu fuja? Não!')
     WORLD.SCENE.dialogs:addDialog('david', 'Preciso me acalmar...')
     WORLD.SCENE.dialogs:addDialog('david', 'Parando para pensar, esta lâmpada me parece esquisita...')
   end)
@@ -211,7 +211,7 @@ function Scene:new(map)
 
   self:addEvent(function()
     WORLD.SCENE.map.entities:remove(paper1)
-    WORLD.SCENE.dialogs:addDialog('empty', 'David examina a base da lampada e ela então emite um brilho intenso.')
+    WORLD.SCENE.dialogs:addDialog('empty', 'David examina a base da lâmpada e ela então emite um brilho intenso.')
   end)
 
   -- Viagem ao Nisus
@@ -272,7 +272,7 @@ function Scene:new(map)
   end)
 
   self:addEvent(function()
-    WORLD.SCENE.dialogs:addDialog('david', 'Esse lugar... Eu ja vi antes, mas como? Isso esta dentro da minha mente ou é real? Adam!')
+    WORLD.SCENE.dialogs:addDialog('david', 'Esse lugar... Eu já vi antes, mas como? Isso está dentro da minha mente ou é real? Adam!')
   end)
 
   self:addEvent(function()

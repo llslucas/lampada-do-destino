@@ -20,7 +20,7 @@ local canvas, scale, offsetX, offsetY
 local menu, gameOver, mainTheme, pauseScreen
 
 function love.load()
-  -- love.window.setMode(0, 0, {fullscreen = true})
+  love.window.setMode(0, 0, {fullscreen = true})
 
   local screenWidth, screenHeight = LG.getDimensions()
   canvas = LG.newCanvas(640, 640)
