@@ -31,7 +31,7 @@ function Scene:new(map)
     self.map.entities:add(player)
 
     armarioAdam = self.map.entities:getItemById('armario-adam')
-    armarioAdam:interact()
+    armarioAdam:open()
   end
 
   -- Definição do papel 1, com a mensagem amigável de adam

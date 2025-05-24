@@ -22,7 +22,7 @@ function Scene:new()
   self.map.entities:add(player)
 
   armarioAdam = self.map.entities:getItemById('armario-adam')
-  armarioAdam:interact()
+  armarioAdam:open()
 
   --Events init
 
