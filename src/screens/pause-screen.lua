@@ -67,23 +67,26 @@ function PauseScreen:addOptions()
     end
   )
 
-  self.options:add(optContinuar, optConfiguracoes, optReset)
+  local optSair = MenuOption('SAIR', 284, 387)
+  optSair:setInteractionCallback(function() love.event.quit() end)
+
+  self.options:add(optContinuar, optConfiguracoes, optReset, optSair)
   self.options:activate()
 end
 
 function PauseScreen:addConfigurations()
   self.configs = MenuOptions()
 
-  local optBgm, optReset
+  local optBgm, optSair
 
   optBgm = MenuOption('MUSIC VOLUME', 176, 166)
   optBgm:setProperty(BGM_VOLUME * 100)
   optBgm:setCallback(function(self) BGM_VOLUME = self.property / 100 end)
 
-  optReset = MenuOption('SAIR', 284, 352)
-  optReset:setInteractionCallback(function() GAME.MENUSTATE = 'menu' end)
+  optSair = MenuOption('SAIR', 284, 352)
+  optSair:setInteractionCallback(function() GAME.MENUSTATE = 'menu' end)
 
-  self.configs:add(optBgm, optReset)
+  self.configs:add(optBgm, optSair)
   self.configs:activate()
 end
 
