@@ -12,11 +12,12 @@ require 'src.global.world'
 -- Dependências locais
 local DebugInfo = require 'src.graphics.debug-info'
 local MainMenu = require 'src.screens.main-menu'
+local PauseScreen = require 'src.screens.pause-screen'
 local GameOver = require 'src.screens.game-over'
 local MainTheme = require 'src.sounds.bgm.main-theme'
 
 local canvas, scale, offsetX, offsetY
-local menu, gameOver, mainTheme
+local menu, gameOver, mainTheme, pauseScreen
 
 function love.load()
   -- love.window.setMode(0, 0, {fullscreen = true})
@@ -34,6 +35,7 @@ function love.load()
   menu = MainMenu()
   gameOver = GameOver()
   mainTheme = MainTheme()
+  pauseScreen = PauseScreen()
 end
 
 function love.draw()
@@ -48,6 +50,10 @@ function love.draw()
   if WORLD.SCENE then
     mainTheme:stop()
     WORLD.SCENE:draw()
+  end
+
+  if GAME.STATE == 'paused' then
+    pauseScreen:draw()
   end
 
   if GAME.STATE == 'gameover' then
@@ -72,7 +78,11 @@ function love.update(dt)
   end
 
   if WORLD.SCENE then
-    WORLD.SCENE:update(dt)
+      WORLD.SCENE:update(dt)
+  end
+
+  if GAME.STATE == 'paused' then
+    pauseScreen:update(dt)
   end
 
   if GAME.STATE == 'gameover' then
@@ -85,8 +95,18 @@ function love.keypressed(key)
     menu:keypressed(key)
   end
 
+  if GAME.STATE == 'running' then
+    if key == 'escape' then
+      GAME.pause()
+    end
+  end
+
   if GAME.STATE == 'gameover' then
     gameOver:keypressed(key)
+  end
+
+  if GAME.STATE == 'paused' then
+    pauseScreen:keypressed(key)
   end
 
   if key == 'f9' then

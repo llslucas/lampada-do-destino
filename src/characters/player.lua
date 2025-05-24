@@ -30,7 +30,7 @@ function Player:update(dt)
 
   self.super.update(self, dt)
 
-  if not GAME.CUTSCENE and not self.moving then
+  if not GAME.CUTSCENE and not GAME.DIALOG and not self.moving then
     if love.keyboard.isDown('up') then
       self:walkUp()
     elseif love.keyboard.isDown('down') then
@@ -55,7 +55,7 @@ function Player:update(dt)
 end
 
 function Player:keypressed(key)
-  if not GAME.CUTSCENE then
+  if not GAME.CUTSCENE and not GAME.DIALOG then
     if key == 'space' then
       self:interact()
     end

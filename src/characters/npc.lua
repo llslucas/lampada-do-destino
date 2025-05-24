@@ -14,7 +14,7 @@ end
 function Npc:update(dt)
   Npc.super.update(self, dt)
 
-  if not GAME.CUTSCENE then
+  if not GAME.CUTSCENE and not GAME.DIALOG then
   self.walkTime = self.walkTime + dt
     if self.walkTime > self.walkInterval and self.walkInterval > 0 then
       self:walkStrategy()

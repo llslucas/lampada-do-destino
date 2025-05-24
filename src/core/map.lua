@@ -24,12 +24,10 @@ function Map:draw()
 end
 
 function Map:update(dt)
-  if GAME.STATE == 'running' then
+  if not GAME.DIALOG then
     self.theme:play()
     self.entities:update(dt)
     self.enemies:update(dt)
-  elseif GAME.STATE == 'gameover' then
-    self.theme:stop()
   end
 end
 
@@ -40,9 +38,7 @@ function Map:keypressed(key)
 end
 
 function Map:keyreleased(key)
-  if GAME.STATE == 'running' then
-    self.entities:keyreleased(key)
-  end
+  self.entities:keyreleased(key)
 end
 
 function Map:setTheme(theme)

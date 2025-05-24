@@ -8,6 +8,10 @@ function MenuOption:new(text, x, y)
   self.hovered = false
   self.x = x or 0
   self.y = y or 0
+  self.min = 0
+  self.max = 100
+  self.alterDelay = 0.07
+  self.elapsedTime = 0
 end
 
 function MenuOption:draw()
@@ -26,13 +30,22 @@ function MenuOption:draw()
   LG.setFont(FONTS.NORMAL)
 end
 
-function MenuOption:keypressed(key)
-  if key == 'right' then
-    self:increments()
-  elseif key == 'left' then
-    self:decrements()
-  end
+function MenuOption:update(dt)
+  if love.keyboard.isDown('right') or love.keyboard.isDown('left') then
+    self.elapsedTime = self.elapsedTime + dt
 
+    if self.elapsedTime >= self.alterDelay then
+      if love.keyboard.isDown('right') then
+        self:increments()
+      elseif love.keyboard.isDown('left') then
+        self:decrements()
+      end
+      self.elapsedTime = 0
+    end
+  end
+end
+
+function MenuOption:keypressed(key)
   if key == 'space' then
     self:interactionCallback()
   end
@@ -76,13 +89,22 @@ function MenuOption:unhover()
 end
 
 function MenuOption:increments()
-  self.property = self.property + 1
+  if self.property then
+    self.property = math.min(self.property + 1, self.max)
+  end
   self:callback()
 end
 
 function MenuOption:decrements()
-  self.property = self.property - 1
+  if self.property then
+    self.property = math.max(self.property - 1, self.min)
+  end
   self:callback()
+end
+
+function MenuOption:setMinMax(min, max)
+  self.min = min
+  self.max = max
 end
 
 function MenuOption:callback()

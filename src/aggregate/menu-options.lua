@@ -6,6 +6,10 @@ function MenuOptions:new()
   self.activeItem = 1
 end
 
+function MenuOptions:update(dt)
+  self.objects[self.activeItem]:update(dt)
+end
+
 function MenuOptions:keypressed(key)
   if key == 'down' then
     self:selectNext()

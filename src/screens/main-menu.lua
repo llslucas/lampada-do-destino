@@ -32,12 +32,14 @@ function MainMenu:draw()
   end
 
   if GAME.MENUSTATE == 'config' then
+    LG.setColor(0, 0, 0)
+    LG.rectangle("fill", 0, 0, LG.getWidth(), LG.getHeight())
+    LG.setColor(1, 1, 1)
+
+    LG.setColor(1, 0.592, 0)
     LG.setFont(FONTS.MENUTITTLE)
     LG.print('CONFIGURAÇÕES', 164, 50)
     LG.setFont(FONTS.NORMAL)
-    LG.setColor(0,0,0)
-    LG.rectangle("fill", 0, 0, LG.getWidth(), LG.getHeight())
-    LG.setColor(1,1,1)
     self.configs:draw()
   end
 end
@@ -50,6 +52,14 @@ function MainMenu:update(dt)
   if self.elapsedTime > 1 then
     self.showText = not self.showText
     self.elapsedTime = 0
+  end
+
+  if GAME.MENUSTATE == 'menu' then
+    self.options:update(dt)
+  end
+
+  if GAME.MENUSTATE == 'config' then
+    self.configs:update(dt)
   end
 end
 
@@ -109,24 +119,20 @@ end
 function MainMenu:addConfigurations()
   self.configs = MenuOptions()
 
-  local optBgm, optSfx, optTextSpeed, optSair
+  local optBgm, optSair
 
   optBgm = MenuOption('MUSIC VOLUME', 176, 166)
   optBgm:setProperty(BGM_VOLUME * 100)
-  optBgm:setCallback(function(self) BGM_VOLUME = self.property * 100 end)
-
-  optSfx = MenuOption('SFX VOLUME', 194, 228)
-  optSfx:setProperty(SFX_VOLUME * 100)
-  optSfx:setCallback(function(self) BGM_VOLUME = self.property * 100 end)
-
-  optTextSpeed = MenuOption('TEXT SPEED', 194, 290)
-  optTextSpeed:setProperty(WORD_RENDERING_SPEED * 100)
-  optTextSpeed:setCallback(function(self) BGM_VOLUME = self.property * 100 end)
+  optBgm:setCallback(function(self)
+    BGM_VOLUME = self.property / 100
+  end)
 
   optSair = MenuOption('SAIR', 284, 352)
-  optSair:setInteractionCallback(function() GAME.MENUSTATE = 'menu' end)
+  optSair:setInteractionCallback(function()
+    GAME.MENUSTATE = 'menu'
+  end)
 
-  self.configs:add(optBgm, optSfx, optTextSpeed, optSair)
+  self.configs:add(optBgm, optSair)
   self.configs:activate()
 end
 

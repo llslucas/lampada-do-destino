@@ -7,6 +7,7 @@ function Sound:new(soundPath, soundType, volume, looping)
 end
 
 function Sound:play()
+  self:setVolume(BGM_VOLUME)
   if not self.sound:isPlaying() then
     self.sound:play()
   end
@@ -22,6 +23,10 @@ function Sound:pause()
   if self.sound:isPlaying() then
     self.sound:pause()
   end
+end
+
+function Sound:setVolume(volume)
+  self.sound:setVolume(volume)
 end
 
 return Sound

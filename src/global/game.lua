@@ -1,6 +1,7 @@
 GAME = {}
 GAME.STATE = "running"
 GAME.CUTSCENE = false
+GAME.DIALOG = false
 GAME.MENUSTATE = "init"
 
 function GAME.resume()

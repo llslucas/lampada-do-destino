@@ -33,24 +33,32 @@ function GenericScene:draw()
 end
 
 function GenericScene:update(dt)
-  self.waitTime = math.max(0, self.waitTime - dt)
-  self.map:update(dt)
-  self.dialogs:update(dt)
-  self:resumeCoroutine()
+  if GAME.STATE == 'running' then
+    self.waitTime = math.max(0, self.waitTime - dt)
+    self.map:update(dt)
+    self.dialogs:update(dt)
+    self:resumeCoroutine()
+  else
+    self.map.theme:stop()
+  end
 end
 
 function GenericScene:keypressed(key)
-  if self.watingInput and key == 'space' then
-    self.watingInput = false
-  else
-    self.map:keypressed(key)
-    self.dialogs:keypressed(key)
+  if GAME.STATE == 'running' then
+    if self.watingInput and key == 'space' then
+      self.watingInput = false
+    else
+      self.map:keypressed(key)
+      self.dialogs:keypressed(key)
+    end
   end
 end
 
 function GenericScene:keyreleased(key)
-  self.map:keyreleased(key)
-  self.dialogs:keyreleased(key)
+  if GAME.STATE == 'running' then
+    self.map:keyreleased(key)
+    self.dialogs:keyreleased(key)
+  end
 end
 
 function GenericScene:addEvent(event)

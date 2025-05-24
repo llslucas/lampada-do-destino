@@ -18,8 +18,8 @@ function Screen:draw()
   self.buttons:draw()
 end
 
-function Screen:update()
-  self.buttons:update()
+function Screen:update(dt)
+  self.buttons:update(dt)
 end
 
 return Screen

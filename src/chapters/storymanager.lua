@@ -23,20 +23,19 @@ end
 function StoryManager:apply()
   local Scene = self:getCurrentScene()
   WORLD.SCENE = Scene()
+  GAME.STATE = 'running'
 end
 
 function StoryManager:advanceScene(...)
   self.currentScene = self.currentScene + 1
-  local Scene = self:getCurrentScene()
   WORLD.SCENE.map.theme:stop()
-  WORLD.SCENE = Scene(...)
+  self:apply()
 end
 
 function StoryManager:advanceChapter()
   self.currentChapter = self.currentChapter + 1
-  local Scene = self:getCurrentScene()
   WORLD.SCENE.map.theme:stop()
-  WORLD.SCENE = Scene()
+  self:apply()
 end
 
 return StoryManager

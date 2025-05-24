@@ -36,7 +36,7 @@ end
 function Dialogs:add(object)
   Dialogs.super.add(self, object)
   self.show = true
-  GAME.pause()
+  GAME.DIALOG = true
 end
 
 function Dialogs:addDialog(character, text)
@@ -56,7 +56,7 @@ function Dialogs:next()
     self:clear()
     self.currentDialog = 1
     self.show = false
-    GAME.resume()
+    GAME.DIALOG = false
   end
 end
 
